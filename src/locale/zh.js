@@ -6,7 +6,7 @@ export default {
 
   Home: "首页",
   Angel: "天使",
-  Pledge: "质押",
+  Stake: "质押",
   About: "关于",
   PE: "私募",
   Whitepaper: "白皮书",
@@ -14,7 +14,8 @@ export default {
 
   Close: "关闭",
 
-  "Pledge Amount": "质押额度",
+  "Stake Amount": "质押额度",
+  "Stake begin in": "质押开始于",
 
   "Connect Wallet": "连接钱包",
   "Disconnect Wallet": "断开钱包连接",
@@ -71,10 +72,10 @@ export default {
   OpeningTime: "开始时间",
   ClosingTime: "结束时间",
   Price: "价格",
-  "Available Pledge Amount": "可质押金额",
-  "Pledged Amount": "已质押金额",
-  "Pledge DAT to liner release DAO.": "质押DAT线性释放DAO",
-  "Pledge DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months.":
+  "Available Stake Amount": "可质押金额",
+  "Staked Amount": "已质押金额",
+  "Stake DAT to liner release DAO.": "质押DAT线性释放DAO",
+  "Stake DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months.":
     "质押DAT分20个月，按月释放DAO，前10个月释放40%，后10个月释放60%。",
 
   "Release Info": "释放信息",
@@ -86,12 +87,12 @@ export default {
   Duration: "释放周期",
 
   Just: "刚刚",
-  "minute ago": " 分钟前",
-  "hour ago": " 小时前",
+  "minute ago": "分钟前",
+  "hour ago": "小时前",
   "1 day ago": "1天前",
-  months: " 月",
-  days: " 天",
-  hours: " 时",
-  minutes: " 分",
-  seconds: " 秒"
+  months: "月",
+  days: "天",
+  hours: "时",
+  minutes: "分",
+  seconds: "秒"
 };

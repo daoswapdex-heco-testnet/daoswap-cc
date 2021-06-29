@@ -6,7 +6,7 @@ export default {
 
   Home: "Home",
   Angel: "Angel",
-  Pledge: "Pledge",
+  Stake: "Stake",
   About: "About",
   PE: "PE",
   Whitepaper: "Whitepaper",
@@ -14,7 +14,8 @@ export default {
 
   Close: "Close",
 
-  "Pledge Amount": "Pledge Amount",
+  "Stake Amount": "Stake Amount",
+  "Stake begin in": "Stake begin in",
 
   "Connect Wallet": "Connect Wallet",
   "Disconnect Wallet": "Disconnect Wallet",
@@ -73,11 +74,11 @@ export default {
   OpeningTime: "Start",
   ClosingTime: "End",
   Price: "Price",
-  "Available Pledge Amount": "Available Pledge Amount",
-  "Pledged Amount": "Pledged Amount",
-  "Pledge DAT to liner release DAO.": "Pledge DAT to liner release DAO.",
-  "Pledge DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months.":
-    "Pledge DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months.",
+  "Available Stake Amount": "Available Stake Amount",
+  "Staked Amount": "Staked Amount",
+  "Stake DAT to liner release DAO.": "Stake DAT to liner release DAO.",
+  "Stake DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months.":
+    "Stake DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months.",
 
   "Release Info": "Release Info",
   Beneficiary: "Beneficiary",
@@ -89,11 +90,11 @@ export default {
 
   Just: "Just",
   "minute ago": "minute ago",
-  "hour ago": " hour ago",
+  "hour ago": "hour ago",
   "1 day ago": "1 day ago",
-  months: " months",
-  days: " days",
-  hours: " hours",
-  minutes: " minutes",
-  seconds: " seconds"
+  months: "months",
+  days: "days",
+  hours: "hours",
+  minutes: "minutes",
+  seconds: "seconds"
 };

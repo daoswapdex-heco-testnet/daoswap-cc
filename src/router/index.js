@@ -25,16 +25,16 @@ const routes = [
         name: "Angel",
         component: CrowdsaleForAngel
       },
-      // {
-      //   path: "/pledge",
-      //   name: "Pledge",
-      //   component: CrowdsaleForRetail
-      // },
       {
-        path: "/pe",
-        name: "PE",
+        path: "/stake",
+        name: "Stake",
         component: CrowdsaleForRetail
       },
+      // {
+      //   path: "/pe",
+      //   name: "PE",
+      //   component: CrowdsaleForRetail
+      // },
       {
         path: "/about",
         name: "About",

@@ -70,12 +70,12 @@
             >{{ $t("Angel") }}</v-tab
           > -->
           <v-tab
-            to="/pe"
+            to="/stake"
             :ripple="false"
             class="font-weight-bold"
             min-width="96"
             text
-            >{{ $t("PE") }}</v-tab
+            >{{ $t("Stake") }}</v-tab
           >
           <v-tab
             to="/Whitepaper.pdf"
@@ -127,8 +127,8 @@
           <!-- <v-list-item to="/angel">
             <v-list-item-title>{{ $t("Angel") }}</v-list-item-title>
           </v-list-item> -->
-          <v-list-item to="/pe">
-            <v-list-item-title>{{ $t("PE") }}</v-list-item-title>
+          <v-list-item to="/stake">
+            <v-list-item-title>{{ $t("Stake") }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/Whitepaper.pdf" target="_blank">
             <v-list-item-title>{{ $t("Whitepaper") }}</v-list-item-title>

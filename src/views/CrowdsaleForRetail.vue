@@ -11,28 +11,35 @@
               </span>
             </v-card-title>
             <v-divider></v-divider>
-            <v-card-text>
+            <v-card-text v-if="dataForCrowdsale.openingTime <= currentTime">
               <v-row align="center">
                 <v-col class="body-1" cols="12">
-                  <!-- <p>
-                    {{ $t("Crowdsaled Amount") }}：
-                    {{ dataForCrowdsale.weiRaised }}
-                    {{ dataForCrowdsale.tokenSymbol }}
-                  </p>
-                  <p>
-                    {{ $t("Crowdsale Cap") }}：
-                    {{ dataForCrowdsale.cap }}
-                    {{ dataForCrowdsale.tokenSymbol }}
-                  </p> -->
                   <p>
                     {{ $t("OpeningTime") }}：
-                    {{ dataForCrowdsale.openingTime }}
+                    {{
+                      dataForCrowdsale.openingTime
+                        | parseTime("{y}-{m}-{d} {h}:{i}:{s}")
+                    }}
                   </p>
                   <p>
                     {{ $t("ClosingTime") }}：
-                    {{ dataForCrowdsale.closingTime }}
+                    {{
+                      dataForCrowdsale.closingTime
+                        | parseTime("{y}-{m}-{d} {h}:{i}:{s}")
+                    }}
                   </p>
                   <p>{{ $t("Price") }}：0.5 USDT</p>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-text
+              justify="center"
+              v-if="currentTime < dataForCrowdsale.openingTime"
+            >
+              <v-row align="center">
+                <v-col class="display-1" cols="12">
+                  <p>{{ $t("Stake begin in") }}：</p>
+                  <p>{{ countdownTime | formatCountdown() }}</p>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -45,25 +52,17 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-light">
-                  {{ $t("Available Pledge Amount") }}
+                  {{ $t("Available Stake Amount") }}
                 </span>
               </v-card-title>
               <v-card-subtitle>
                 {{
                   $t(
-                    "Pledge DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months."
+                    "Stake DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months."
                   )
                 }}
               </v-card-subtitle>
               <v-divider></v-divider>
-              <!-- <v-card-text
-                align="center"
-                justify="center"
-                v-if="dataForCrowdsale.isOpen"
-              >
-                {{ accountAssets.balance }}
-                {{ dataForCrowdsale.tokenSymbol }}
-              </v-card-text> -->
               <v-card-text v-if="dataForCrowdsale.isOpen">
                 <v-row align="center">
                   <v-col class="display-3" cols="12">
@@ -95,7 +94,7 @@
                   {{
                     accountAssets.allowanceAmount &&
                     accountAssets.allowanceAmount >= accountAssets.balance
-                      ? $t("Pledge")
+                      ? $t("Stake")
                       : $t("Approve")
                   }}
                 </v-btn>
@@ -118,13 +117,13 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-light">
-                  {{ $t("Pledged Amount") }}
+                  {{ $t("Staked Amount") }}
                 </span>
               </v-card-title>
               <v-card-subtitle>
                 {{
                   $t(
-                    "Pledge DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months."
+                    "Stake DAT to monthly release DAO in 20 months. Release 40% in first 10 months, 60% in rest 10 months."
                   )
                 }}
               </v-card-subtitle>
@@ -177,11 +176,14 @@
                     </p>
                     <p>
                       {{ $t("Start") }}：
-                      {{ dataForTokenVesting.start }}
+                      {{
+                        dataForTokenVesting.start
+                          | parseTime("{y}-{m}-{d} {h}:{i}:{s}")
+                      }}
                     </p>
                     <p>
                       {{ $t("Duration") }}：
-                      {{ dataForTokenVesting.duration }}
+                      {{ dataForTokenVesting.duration | formatSeconds() }}
                     </p>
                   </v-col>
                 </v-row>
@@ -275,7 +277,6 @@
 
 <script>
 import clip from "@/utils/clipboard";
-import { parseTime, formatSeconds } from "@/utils/utilities";
 import {
   CrowdsaleForRetailContractAddress,
   DATAddress,
@@ -299,8 +300,8 @@ export default {
     dataForCrowdsale: {
       tokenSymbol: null,
       weiRaised: 0,
-      openingTime: null,
-      closingTime: null,
+      openingTime: "1625017800",
+      closingTime: "",
       cap: 0,
       joinedAmount: 0,
       isOpen: false,
@@ -313,7 +314,7 @@ export default {
       beneficiary: null,
       balance: 0,
       released: 0,
-      start: null,
+      start: "",
       duration: null,
       releasableAmount: 0
     },
@@ -326,10 +327,16 @@ export default {
     operationResult: {
       snackbar: false,
       text: `Hello`
-    }
+    },
+    currentTime: Math.floor(Date.now() / 1000),
+    timer: null,
+    // 倒计时时间值
+    countdownTime: 0
   }),
   created() {
     this.getAccountAssets();
+    this.countdownTime = 1625017800 - this.currentTime;
+    this.timer = setInterval(this.handleTimeup, 1000);
   },
   computed: {
     connected() {
@@ -342,12 +349,19 @@ export default {
       return this.$store.state.web3.address;
     }
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
   methods: {
     // 复制地址
     handleCopy(text, event) {
       clip(text, event);
       this.operationResult.snackbar = true;
       this.operationResult.text = "Cope Success";
+    },
+    // 倒计时到了，刷新页面
+    handleTimeup() {
+      this.countdownTime -= 1;
     },
     // 获取众筹信息
     async getCrowdsaleInfo() {
@@ -361,16 +375,12 @@ export default {
         );
         const weiRaised = await contract.methods.weiRaised().call();
         this.dataForCrowdsale.weiRaised = weiToEther(weiRaised);
-        const openingTime = await contract.methods.openingTime().call();
-        this.dataForCrowdsale.openingTime = parseTime(
-          openingTime,
-          "{y}-{m}-{d} {h}:{i}:{s}"
-        );
-        const closingTime = await contract.methods.closingTime().call();
-        this.dataForCrowdsale.closingTime = parseTime(
-          closingTime,
-          "{y}-{m}-{d} {h}:{i}:{s}"
-        );
+        // this.dataForCrowdsale.openingTime = await contract.methods
+        //   .openingTime()
+        //   .call();
+        this.dataForCrowdsale.closingTime = await contract.methods
+          .closingTime()
+          .call();
         const cap = await contract.methods.cap().call();
         this.dataForCrowdsale.cap = weiToEther(cap);
         const joinedAmount = await contract.methods.joined(this.address).call();
@@ -422,13 +432,12 @@ export default {
             .call();
           const released = await contract.methods.released(DAOAddress).call();
           this.dataForTokenVesting.released = weiToEther(released);
-          const start = await contract.methods.start().call();
-          this.dataForTokenVesting.start = parseTime(
-            start,
-            "{y}-{m}-{d} {h}:{i}:{s}"
-          );
-          const duration = await contract.methods.duration().call();
-          this.dataForTokenVesting.duration = formatSeconds(duration);
+          this.dataForTokenVesting.start = await contract.methods
+            .start()
+            .call();
+          this.dataForTokenVesting.duration = await contract.methods
+            .duration()
+            .call();
           const releasableAmount = await contract.methods
             .releasableAmount(DAOAddress)
             .call();
