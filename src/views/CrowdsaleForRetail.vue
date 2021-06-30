@@ -11,6 +11,7 @@
               </span>
             </v-card-title>
             <v-divider></v-divider>
+            <!-- 开始时间小于等于当前时间，显示PE信息 -->
             <v-card-text v-if="dataForCrowdsale.openingTime <= currentTime">
               <v-row align="center">
                 <v-col class="body-1" cols="12">
@@ -32,20 +33,46 @@
                 </v-col>
               </v-row>
             </v-card-text>
+            <!-- 倒计时时间大于0并且未真正开始,显示开始倒计时信息 -->
             <v-card-text
               justify="center"
-              v-if="currentTime < dataForCrowdsale.openingTime"
+              v-if="
+                dataForCrowdsale.openingTime > currentTime &&
+                  countdownTime > 0 &&
+                  !isRealStart
+              "
             >
               <v-row align="center">
                 <v-col class="display-1" cols="12">
                   <p>{{ $t("Stake begin in") }}：</p>
-                  <p>{{ countdownTime | formatCountdown() }}</p>
+                  <p class="text-h5">
+                    {{ countdownTime | formatCountdown() }}
+                  </p>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <!-- 倒计时时间大于0并且真正开始,显示结束倒计时信息 -->
+            <v-card-text
+              justify="center"
+              v-if="
+                dataForCrowdsale.openingTime > currentTime &&
+                  countdownTime > 0 &&
+                  isRealStart
+              "
+            >
+              <v-row align="center">
+                <v-col class="display-1" cols="12">
+                  <p>{{ $t("Stake end in") }}：</p>
+                  <p class="text-h5">
+                    {{ countdownTime | formatCountdown() }}
+                  </p>
                 </v-col>
               </v-row>
             </v-card-text>
           </v-card>
           <!-- 认购操作 -->
           <v-card class="fill-width mt-10">
+            <!-- 未参与过 -->
             <v-card outlined v-if="dataForCrowdsale.joinedAmount <= 0">
               <v-card-title>
                 <v-avatar size="24" class="mr-2">
@@ -99,18 +126,20 @@
                   }}
                 </v-btn>
               </v-card-actions>
+              <!-- 未开始/已结束时的显示 -->
               <v-card-text justify="center" v-if="!dataForCrowdsale.isOpen">
                 <v-row align="center">
                   <v-col class="display-1" cols="12">
                     {{
                       dataForCrowdsale.hasClosed
-                        ? $t("Crowdsale is closed")
-                        : $t("Crowdsale not started")
+                        ? $t("Stake is closed")
+                        : $t("Stake not started")
                     }}
                   </v-col>
                 </v-row>
               </v-card-text>
             </v-card>
+            <!-- 已参与过 -->
             <v-card outlined v-if="dataForCrowdsale.joinedAmount > 0">
               <v-card-title>
                 <v-avatar size="24" class="mr-2">
@@ -230,7 +259,6 @@
               </v-row>
             </v-card-text>
           </v-card>
-
           <!-- 官方说明 -->
           <v-card justify="center" class="fill-width mt-10">
             <v-card-text>
@@ -300,7 +328,7 @@ export default {
     dataForCrowdsale: {
       tokenSymbol: null,
       weiRaised: 0,
-      openingTime: "1625190600",
+      openingTime: "1625037600",
       closingTime: "",
       cap: 0,
       joinedAmount: 0,
@@ -331,12 +359,11 @@ export default {
     currentTime: Math.floor(Date.now() / 1000),
     timer: null,
     // 倒计时时间值
+    isRealStart: false,
     countdownTime: 0
   }),
   created() {
     this.getAccountAssets();
-    this.countdownTime = 1625017800 - this.currentTime;
-    this.timer = setInterval(this.handleTimeup, 1000);
   },
   computed: {
     connected() {
@@ -362,6 +389,18 @@ export default {
     // 倒计时到了，刷新页面
     handleTimeup() {
       this.countdownTime -= 1;
+      if (this.countdownTime <= 0 && this.isRealStart) {
+        clearInterval(this.timer);
+      } else if (this.countdownTime <= 0 && !this.isRealStart) {
+        this.countdownTime = 300;
+        this.isRealStart = true;
+      }
+    },
+    // 设置倒计时
+    handleSetTimeup(value) {
+      // 添加倒计时参数
+      this.countdownTime = parseInt(value) - this.currentTime;
+      this.timer = setInterval(this.handleTimeup, 1000);
     },
     // 获取众筹信息
     async getCrowdsaleInfo() {
@@ -378,6 +417,9 @@ export default {
         // this.dataForCrowdsale.openingTime = await contract.methods
         //   .openingTime()
         //   .call();
+        this.dataForCrowdsale.openingTime =
+          parseInt(this.dataForCrowdsale.openingTime) + 300;
+        this.handleSetTimeup(this.dataForCrowdsale.openingTime);
         this.dataForCrowdsale.closingTime = await contract.methods
           .closingTime()
           .call();

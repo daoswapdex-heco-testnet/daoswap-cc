@@ -39,6 +39,9 @@ export function ellipseAddress(address, width = 10) {
  * @returns {string | null}
  */
 export function parseTime(time, cFormat) {
+  if (time === "") {
+    return "";
+  }
   if (arguments.length === 0) {
     return null;
   }
@@ -120,6 +123,9 @@ export function formatTime(time, option) {
 
 // 格式化秒数
 export function formatSeconds(value) {
+  if (value === "") {
+    return "";
+  }
   var secondTime = parseInt(value); // 秒
   var minuteTime = 0; // 分
   var hourTime = 0; // 小时
@@ -198,17 +204,17 @@ export function formatCountdown(value) {
     }
     if (secondTime > 0) {
       secondTime = parseInt(secondTime) >= 10 ? secondTime : "0" + secondTime;
-      result = " " + secondTime; // "秒";
+      result = " " + secondTime + i18n.t("seconds"); // "秒";
     }
     if (minuteTime > 0) {
       minuteTime = parseInt(minuteTime) >= 10 ? minuteTime : "0" + minuteTime;
-      result = "" + minuteTime + " : " + result;
+      result = " " + minuteTime + i18n.t("minutes") + result;
     }
     if (hourTime > 0) {
-      result = "" + parseInt(hourTime) + " : " + result;
+      result = " " + parseInt(hourTime) + i18n.t("hours") + result;
     }
     if (dayTime > 0) {
-      result = "" + parseInt(dayTime) + " : " + result;
+      result = "" + parseInt(dayTime) + i18n.t("days") + result;
     }
   }
   return result;

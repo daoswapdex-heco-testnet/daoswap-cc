@@ -16,6 +16,7 @@ export default {
 
   "Stake Amount": "Stake Amount",
   "Stake begin in": "Stake begin in",
+  "Stake end in": "Stake end in",
 
   "Connect Wallet": "Connect Wallet",
   "Disconnect Wallet": "Disconnect Wallet",
@@ -96,5 +97,8 @@ export default {
   days: "days",
   hours: "hours",
   minutes: "minutes",
-  seconds: "seconds"
+  seconds: "seconds",
+
+  "Stake not started": "Stake not started",
+  "Stake is closed": "Stake is closed"
 };

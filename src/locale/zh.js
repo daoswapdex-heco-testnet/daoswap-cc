@@ -15,7 +15,8 @@ export default {
   Close: "关闭",
 
   "Stake Amount": "质押额度",
-  "Stake begin in": "质押开始于",
+  "Stake begin in": "认购开始于",
+  "Stake end in": "认购结束于",
 
   "Connect Wallet": "连接钱包",
   "Disconnect Wallet": "断开钱包连接",
@@ -94,5 +95,8 @@ export default {
   days: "天",
   hours: "时",
   minutes: "分",
-  seconds: "秒"
+  seconds: "秒",
+
+  "Stake not started": "活动未开始",
+  "Stake is closed": "活动已结束"
 };
