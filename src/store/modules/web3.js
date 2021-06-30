@@ -3,7 +3,7 @@ import { removeAccount } from "../../utils/web3";
 import { CHAIN_ID, NETWORK_ID } from "@/constants";
 
 const state = {
-  web3: init(),
+  web3: null,
   address: getAccount(),
   web3Modal: undefined,
   provider: undefined,
