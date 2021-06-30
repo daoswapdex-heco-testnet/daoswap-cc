@@ -328,7 +328,7 @@ export default {
     dataForCrowdsale: {
       tokenSymbol: null,
       weiRaised: 0,
-      openingTime: "1625037600",
+      openingTime: "1625038200",
       closingTime: "",
       cap: 0,
       joinedAmount: 0,
