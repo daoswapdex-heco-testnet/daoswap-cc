@@ -388,6 +388,13 @@ export default {
       this.getAccountAssets();
     }
   },
+  watch: {
+    web3(web3) {
+      if (web3) {
+        this.getAccountAssets();
+      }
+    }
+  },
   computed: {
     connected() {
       return this.$store.state.web3.connected;
