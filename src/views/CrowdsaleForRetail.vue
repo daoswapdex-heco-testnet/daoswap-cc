@@ -264,12 +264,12 @@
             <v-card-text>
               <v-row align="center">
                 <v-col class="body-1" cols="12">
-                  <p @click="handleCopy(DATAddress, $event)">
-                    DAO contract: {{ DATAddress }}
+                  <p @click="handleCopy(DAOAddress, $event)">
+                    DAO contract: {{ DAOAddress }}
                     <v-icon>mdi-content-copy</v-icon>
                   </p>
-                  <p @click="handleCopy(DAOAddress, $event)">
-                    DAT contract: {{ DAOAddress }}
+                  <p @click="handleCopy(DATAddress, $event)">
+                    DAT contract: {{ DATAddress }}
                     <v-icon>mdi-content-copy</v-icon>
                   </p>
                   <p>
