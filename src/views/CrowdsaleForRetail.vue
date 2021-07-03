@@ -455,7 +455,7 @@ export default {
         this.dataForCrowdsale.weiRaised = weiToEther(weiRaised);
         const openingTime = await contract.methods.openingTime().call();
         this.dataForCrowdsale.openingTime = parseInt(openingTime) + 300;
-        this.handleSetTimeup(this.dataForCrowdsale.openingTime);
+        this.handleSetTimeup(openingTime);
         this.dataForCrowdsale.closingTime = await contract.methods
           .closingTime()
           .call();
