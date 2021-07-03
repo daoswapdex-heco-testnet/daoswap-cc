@@ -11,7 +11,7 @@
               </span>
             </v-card-title>
             <v-divider></v-divider>
-            <!-- 开始时间小于等于当前时间，显示PE信息 -->
+            <!-- 开始时间小于等于当前时间，显示PE信息， 7月1号0点打开 -->
             <v-card-text v-if="dataForCrowdsale.openingTime <= currentTime">
               <v-row align="center">
                 <v-col class="body-1" cols="12">
@@ -349,7 +349,7 @@ export default {
     dataForCrowdsale: {
       tokenSymbol: null,
       weiRaised: 0,
-      openingTime: "1625071200",
+      openingTime: "",
       closingTime: "",
       cap: 0,
       joinedAmount: 0,
@@ -453,11 +453,8 @@ export default {
         );
         const weiRaised = await contract.methods.weiRaised().call();
         this.dataForCrowdsale.weiRaised = weiToEther(weiRaised);
-        // this.dataForCrowdsale.openingTime = await contract.methods
-        //   .openingTime()
-        //   .call();
-        this.dataForCrowdsale.openingTime =
-          parseInt(this.dataForCrowdsale.openingTime) + 300;
+        const openingTime = await contract.methods.openingTime().call();
+        this.dataForCrowdsale.openingTime = parseInt(openingTime) + 300;
         this.handleSetTimeup(this.dataForCrowdsale.openingTime);
         this.dataForCrowdsale.closingTime = await contract.methods
           .closingTime()

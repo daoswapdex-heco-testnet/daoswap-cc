@@ -6254,12 +6254,12 @@
     "256": {
       "events": {},
       "links": {},
-      "address": "0x195D149643D5834b61480ea2eD430021C1502912",
-      "transactionHash": "0x286274268b5e6d060d8e1d88d2925b7d501a321405f786601d581a4491543291"
+      "address": "0x31202f1e8CE970D19DEDA3a12351c8F56074d89e",
+      "transactionHash": "0x87c4760f60b57199a9bc29d756976b282c5b2b3a24699392415d6dfc997d3157"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-06-26T01:41:32.160Z",
+  "updatedAt": "2021-07-03T09:37:50.217Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
