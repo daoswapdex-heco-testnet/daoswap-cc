@@ -225,7 +225,7 @@ export default {
           web3
         );
         const joinedAmount = await contract.methods.joined(this.address).call();
-        this.dataForCrowdsale.joinedAmount = weiToEther(joinedAmount);
+        this.dataForCrowdsale.joinedAmount = weiToEther(joinedAmount, web3);
         // 获取分期释放合约地址
         this.dataForCrowdsale.tokenVestingAddress = null;
         const TokenVestingInfo = await contract.methods
@@ -244,32 +244,29 @@ export default {
     // 获取分期释放信息
     async getTokenVestingInfo() {
       if (this.dataForCrowdsale.tokenVestingAddress) {
+        const web3 = await this.web3;
         this.loading = true;
         try {
           // 获取分期释放合约余额
-          const contractERC20 = await getContract(
-            ERC20DAO,
-            DAOAddress,
-            this.web3
-          );
+          const contractERC20 = await getContract(ERC20DAO, DAOAddress, web3);
           this.dataForTokenVesting.tokenSymbol = await contractERC20.methods
             .symbol()
             .call();
           const balance = await contractERC20.methods
             .balanceOf(this.dataForCrowdsale.tokenVestingAddress)
             .call();
-          this.dataForTokenVesting.balance = weiToEther(balance);
+          this.dataForTokenVesting.balance = weiToEther(balance, web3);
           // 获取分期释放合约信息
           const contract = await getContract(
             TokenVestingAngel,
             this.dataForCrowdsale.tokenVestingAddress,
-            this.web3
+            web3
           );
           this.dataForTokenVesting.beneficiary = await contract.methods
             .beneficiary()
             .call();
           const released = await contract.methods.released(DAOAddress).call();
-          this.dataForTokenVesting.released = weiToEther(released);
+          this.dataForTokenVesting.released = weiToEther(released, web3);
           const start = await contract.methods.start().call();
           this.dataForTokenVesting.start = parseTime(
             start,
@@ -281,7 +278,8 @@ export default {
             .releasableAmount(DAOAddress)
             .call();
           this.dataForTokenVesting.releasableAmount = weiToEther(
-            releasableAmount
+            releasableAmount,
+            web3
           );
         } catch (error) {
           console.info(error);

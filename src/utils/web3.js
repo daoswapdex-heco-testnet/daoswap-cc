@@ -149,9 +149,10 @@ export function getContractByABI(contractABI, token, web3) {
  * 格式化Wei To Ether
  * @returns etherValue
  */
-export function weiToEther(amount, decimals) {
-  const decimalsVal = decimals || 18;
-  return amount / Math.pow(10, decimalsVal);
+export function weiToEther(amount, web3) {
+  return web3.utils.fromWei(amount, "ether");
+  // const decimalsVal = decimals || 18;
+  // return amount / Math.pow(10, decimalsVal);
 }
 
 /**
