@@ -539,8 +539,8 @@ export default {
           .allowance(this.address, CrowdsaleForRetailContractAddress)
           .call();
         const balance = await contract.methods.balanceOf(this.address).call();
-        this.accountAssets.allowanceAmount = weiToEther(allowance);
-        this.accountAssets.balance = weiToEther(balance);
+        this.accountAssets.allowanceAmount = weiToEther(allowance, web3);
+        this.accountAssets.balance = weiToEther(balance, web3);
         await this.getCrowdsaleInfo();
         await this.getTokenVestingInfo();
       } catch (error) {
