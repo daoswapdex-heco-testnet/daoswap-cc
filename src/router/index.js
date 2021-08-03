@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 // import Home from "../views/Home.vue";
 import CrowdsaleForAngel from "../views/CrowdsaleForAngel.vue";
 import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
+import Airdrop from "../views/Airdrop.vue";
 import About from "../views/About.vue";
 import News from "../views/News.vue";
 
@@ -29,6 +30,11 @@ const routes = [
         path: "/stake",
         name: "Stake",
         component: CrowdsaleForRetail
+      },
+      {
+        path: "/airdrop",
+        name: "Airdrop",
+        component: Airdrop
       },
       // {
       //   path: "/pe",

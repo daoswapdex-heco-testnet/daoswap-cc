@@ -1,7 +1,7 @@
 const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-  publicPath: "./", // 文件加载设置为相对路径
+  // publicPath: "./", // 文件加载设置为相对路径
   productionSourceMap: false,
   transpileDependencies: ["vuetify"],
   configureWebpack: {

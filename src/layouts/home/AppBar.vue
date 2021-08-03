@@ -78,6 +78,14 @@
             >{{ $t("Stake") }}</v-tab
           >
           <v-tab
+            to="/airdrop"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("Airdrop") }}</v-tab
+          >
+          <v-tab
             to="/Whitepaper.pdf"
             target="_blank"
             :ripple="false"
@@ -129,6 +137,9 @@
           </v-list-item> -->
           <v-list-item to="/stake">
             <v-list-item-title>{{ $t("Stake") }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/airdrop">
+            <v-list-item-title>{{ $t("Airdrop") }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/Whitepaper.pdf" target="_blank">
             <v-list-item-title>{{ $t("Whitepaper") }}</v-list-item-title>

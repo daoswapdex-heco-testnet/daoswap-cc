@@ -7,6 +7,7 @@ export default {
   Home: "首页",
   Angel: "天使",
   Stake: "质押",
+  Airdrop: "空投",
   About: "关于",
   PE: "私募",
   Whitepaper: "白皮书",
@@ -98,5 +99,12 @@ export default {
   seconds: "秒",
 
   "Stake not started": "活动未开始",
-  "Stake is closed": "活动已结束"
+  "Stake is closed": "活动已结束",
+
+  "Receive airdrop": "领取空投",
+  "Cannot receive airdrops": "不能领取空投",
+  "Inviter address": "邀请人地址",
+  Receive: "领取",
+  "Please fill in the inviter's address": "请填写邀请人地址",
+  "The inviter's address is wrong": "邀请人地址错误"
 };
