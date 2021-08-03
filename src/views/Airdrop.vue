@@ -221,7 +221,6 @@ export default {
         } else {
           this.accountAssets.isInvited = false;
         }
-        console.info(this.accountAssets.isInvited);
       } catch (error) {
         console.info(error);
       }
