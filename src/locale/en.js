@@ -103,12 +103,16 @@ export default {
   "Stake not started": "Stake not started",
   "Stake is closed": "Stake is closed",
 
-  "Receive airdrop": "Receive airdrop",
+  "Receive airdrop": "Airdrop",
   "Cannot receive airdrops": "Cannot receive airdrops",
   "Inviter address": "Inviter address",
   Receive: "Receive",
   "Please fill in the inviter's address":
     "Please fill in the inviter's address",
   "The inviter's address is wrong": "The inviter's address is wrong",
-  "Received amount": "Received amount"
+  "Received amount": "Received amount",
+  "Please enter your mentor's address to open mystery box":
+    "Please enter your mentor's address to open mystery box",
+  "Please enter your mentor's address": "Please enter your mentor's address",
+  Open: "Open"
 };

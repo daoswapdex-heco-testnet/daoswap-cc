@@ -109,7 +109,7 @@
       <v-app-bar-nav-icon class="hidden-md-and-up" @click="drawer = !drawer" />
 
       <!-- 多语言切换 -->
-      <!-- <v-menu offset-y>
+      <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn text v-bind="attrs" v-on="on">
             <v-icon>mdi-translate</v-icon>
@@ -123,7 +123,7 @@
             ></v-list-item-title>
           </v-list-item>
         </v-list>
-      </v-menu> -->
+      </v-menu>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>

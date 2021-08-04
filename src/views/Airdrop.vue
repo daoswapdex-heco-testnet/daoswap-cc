@@ -41,7 +41,11 @@
                 </v-row>
                 <form v-else>
                   <v-card-title>
-                    <span class="headline">{{ $t("Inviter address") }}</span>
+                    <span class="headline">{{
+                      $t(
+                        "Please enter your mentor's address to open mystery box"
+                      )
+                    }}</span>
                   </v-card-title>
                   <v-card-text>
                     <v-text-field
@@ -61,7 +65,7 @@
                       width="80%"
                       @click="submit"
                     >
-                      {{ $t("Receive") }}
+                      {{ $t("Open") }}
                     </v-btn>
                   </v-card-actions>
                 </form>
@@ -188,16 +192,16 @@ export default {
       const errors = [];
       if (!this.$v.inviterAccount.$dirty) return errors;
       !this.$v.inviterAccount.required &&
-        errors.push(this.$t("Please fill in the inviter's address"));
+        errors.push(this.$t("Please enter your mentor's address"));
 
       try {
         if (checkAddressChecksum(this.inviterAccount)) {
           return errors;
         } else {
-          errors.push(this.$t("The inviter's address is wrong"));
+          errors.push(this.$t("The mentor's address is wrong"));
         }
       } catch (e) {
-        errors.push(this.$t("The inviter's address is wrong"));
+        errors.push(this.$t("The mentor's address is wrong"));
       }
 
       return errors;
@@ -288,7 +292,7 @@ export default {
         } else {
           this.operationResult.color = "error";
           this.operationResult.snackbar = true;
-          this.operationResult.text = "The inviter's address is wrong";
+          this.operationResult.text = "The mentor's address is wrong";
           this.loading = false;
         }
       }
