@@ -14,7 +14,7 @@
                 </span>
               </v-card-title>
               <v-divider></v-divider>
-              <v-card-text v-if="accountAssets.isInvited">
+              <v-card-text v-if="!accountAssets.enableReceive">
                 <v-row align="center">
                   <v-col class="display-3" cols="12">
                     {{ $t("Cannot receive airdrops") }}
@@ -22,7 +22,24 @@
                 </v-row>
               </v-card-text>
               <v-card-text v-else>
-                <form>
+                <v-row align="center" v-if="accountAssets.isInvited">
+                  <v-col class="display-3" cols="12">
+                    <v-card-title>
+                      <span class="headline">{{ $t("Received amount") }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-row align="center">
+                        <v-col class="display-3" cols="12">
+                          {{ accountAssets.airdropAmount }}
+                          <span class="display-1">
+                            DAO
+                          </span>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-col>
+                </v-row>
+                <form v-else>
                   <v-card-title>
                     <span class="headline">{{ $t("Inviter address") }}</span>
                   </v-card-title>
@@ -117,7 +134,7 @@ import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import clip from "@/utils/clipboard";
 import { AirdropContractAddress } from "@/constants";
-import { getContract, checkAddressChecksum } from "@/utils/web3";
+import { getContract, checkAddressChecksum, weiToEther } from "@/utils/web3";
 // 引入合约 ABI 文件
 import Airdrop from "@/constants/contractJson/Airdrop.json";
 
@@ -133,6 +150,7 @@ export default {
     inviterAccount: undefined,
     // 当前账户相关信息
     accountAssets: {
+      enableReceive: false,
       isInvited: false,
       inviterToken: null,
       airdropAmount: 0
@@ -210,16 +228,27 @@ export default {
           AirdropContractAddress,
           this.web3
         );
-        const hasAirdropList = await contract.methods
-          .hasAirdropList(this.address)
-          .call();
         const hasWhitelist = await contract.methods
           .hasWhitelist(this.address)
           .call();
-        if (hasAirdropList || hasWhitelist) {
-          this.accountAssets.isInvited = true;
-        } else {
-          this.accountAssets.isInvited = false;
+        if (!hasWhitelist) {
+          this.accountAssets.enableReceive = true;
+          const hasAirdropList = await contract.methods
+            .hasAirdropList(this.address)
+            .call();
+          if (hasAirdropList) {
+            this.accountAssets.isInvited = true;
+            const inviteInfo = await contract.methods
+              .airdropList(this.address)
+              .call();
+            this.accountAssets.inviterToken = inviteInfo.inviterToken;
+            this.accountAssets.airdropAmount = weiToEther(
+              inviteInfo.airdropAmount,
+              this.web3
+            );
+          } else {
+            this.accountAssets.isInvited = false;
+          }
         }
       } catch (error) {
         console.info(error);
@@ -247,14 +276,21 @@ export default {
           // 执行合约
           getContract(Airdrop, AirdropContractAddress, this.web3)
             .methods.receiveAirdrop(this.inviterAccount)
-            .send({ from: this.address });
-          this.getAccountAssets();
+            .send({ from: this.address })
+            .then(() => {
+              this.loading = false;
+              this.getAccountAssets();
+            })
+            .catch(e => {
+              this.loading = false;
+              console.info(e);
+            });
         } else {
           this.operationResult.color = "error";
           this.operationResult.snackbar = true;
           this.operationResult.text = "The inviter's address is wrong";
+          this.loading = false;
         }
-        this.loading = false;
       }
     }
   }

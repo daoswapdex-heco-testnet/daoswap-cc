@@ -109,5 +109,6 @@ export default {
   Receive: "Receive",
   "Please fill in the inviter's address":
     "Please fill in the inviter's address",
-  "The inviter's address is wrong": "The inviter's address is wrong"
+  "The inviter's address is wrong": "The inviter's address is wrong",
+  "Received amount": "Received amount"
 };

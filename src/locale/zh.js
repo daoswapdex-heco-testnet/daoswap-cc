@@ -106,5 +106,6 @@ export default {
   "Inviter address": "邀请人地址",
   Receive: "领取",
   "Please fill in the inviter's address": "请填写邀请人地址",
-  "The inviter's address is wrong": "邀请人地址错误"
+  "The inviter's address is wrong": "邀请人地址错误",
+  "Received amount": "已领取金额"
 };
