@@ -114,5 +114,6 @@ export default {
   "Please enter your mentor's address to open mystery box":
     "Please enter your mentor's address to open mystery box",
   "Please enter your mentor's address": "Please enter your mentor's address",
-  Open: "Open"
+  Open: "Open",
+  "Already received or not qualify": "Already received or not qualify"
 };

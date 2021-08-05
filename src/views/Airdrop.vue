@@ -17,7 +17,7 @@
               <v-card-text v-if="!accountAssets.enableReceive">
                 <v-row align="center">
                   <v-col class="display-3" cols="12">
-                    {{ $t("Cannot receive airdrops") }}
+                    {{ $t("Already received or not qualify") }}
                   </v-col>
                 </v-row>
               </v-card-text>
