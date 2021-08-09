@@ -14,14 +14,15 @@
                 </span>
               </v-card-title>
               <v-divider></v-divider>
-              <v-card-text v-if="!accountAssets.enableReceive">
+              <!-- <v-card-text v-if="!accountAssets.enableReceive">
                 <v-row align="center">
                   <v-col class="display-3" cols="12">
                     {{ $t("Already received or not qualify") }}
                   </v-col>
                 </v-row>
               </v-card-text>
-              <v-card-text v-else>
+              <v-card-text v-else> -->
+              <v-card-text>
                 <v-row align="center" v-if="accountAssets.isInvited">
                   <v-col class="display-3" cols="12">
                     <v-card-title>
@@ -159,7 +160,7 @@ export default {
     inviterAccount: undefined,
     // 当前账户相关信息
     accountAssets: {
-      enableReceive: false,
+      // enableReceive: false,
       isInvited: false,
       inviterToken: null,
       airdropAmount: 0
@@ -247,7 +248,7 @@ export default {
         //   .hasWhitelist(this.address)
         //   .call();
         // if (!hasWhitelist) {
-        this.accountAssets.enableReceive = true;
+        // this.accountAssets.enableReceive = true;
         const hasAirdropList = await contract.methods
           .hasAirdropList(this.address)
           .call();
