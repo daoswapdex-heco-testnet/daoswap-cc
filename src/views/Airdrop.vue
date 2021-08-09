@@ -138,7 +138,12 @@ import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import clip from "@/utils/clipboard";
 import { AirdropContractAddress } from "@/constants";
-import { getContract, checkAddressChecksum, weiToEther } from "@/utils/web3";
+import {
+  getContract,
+  // checkAddressChecksum,
+  toChecksumAddress,
+  weiToEther
+} from "@/utils/web3";
 // 引入合约 ABI 文件
 import Airdrop from "@/constants/contractJson/Airdrop.json";
 
@@ -195,7 +200,13 @@ export default {
         errors.push(this.$t("Please enter your mentor's address"));
 
       try {
-        if (checkAddressChecksum(this.inviterAccount)) {
+        if (toChecksumAddress(this.$v.inviterAccount.$model)) {
+          if (
+            toChecksumAddress(this.$v.inviterAccount.$model) == this.address
+          ) {
+            errors.push(this.$t("The inviter's account cannot be yourself"));
+            return errors;
+          }
           return errors;
         } else {
           errors.push(this.$t("The mentor's address is wrong"));
@@ -232,28 +243,28 @@ export default {
           AirdropContractAddress,
           this.web3
         );
-        const hasWhitelist = await contract.methods
-          .hasWhitelist(this.address)
+        // const hasWhitelist = await contract.methods
+        //   .hasWhitelist(this.address)
+        //   .call();
+        // if (!hasWhitelist) {
+        this.accountAssets.enableReceive = true;
+        const hasAirdropList = await contract.methods
+          .hasAirdropList(this.address)
           .call();
-        if (!hasWhitelist) {
-          this.accountAssets.enableReceive = true;
-          const hasAirdropList = await contract.methods
-            .hasAirdropList(this.address)
+        if (hasAirdropList) {
+          this.accountAssets.isInvited = true;
+          const inviteInfo = await contract.methods
+            .airdropList(this.address)
             .call();
-          if (hasAirdropList) {
-            this.accountAssets.isInvited = true;
-            const inviteInfo = await contract.methods
-              .airdropList(this.address)
-              .call();
-            this.accountAssets.inviterToken = inviteInfo.inviterToken;
-            this.accountAssets.airdropAmount = weiToEther(
-              inviteInfo.airdropAmount,
-              this.web3
-            );
-          } else {
-            this.accountAssets.isInvited = false;
-          }
+          this.accountAssets.inviterToken = inviteInfo.inviterToken;
+          this.accountAssets.airdropAmount = weiToEther(
+            inviteInfo.airdropAmount,
+            this.web3
+          );
+        } else {
+          this.accountAssets.isInvited = false;
         }
+        // }
       } catch (error) {
         console.info(error);
       }
@@ -274,12 +285,12 @@ export default {
         this.loading = true;
         // check account
         const hasWhitelist = await contract.methods
-          .hasWhitelist(this.inviterAccount)
+          .hasWhitelist(toChecksumAddress(this.inviterAccount))
           .call();
         if (hasWhitelist) {
           // 执行合约
           getContract(Airdrop, AirdropContractAddress, this.web3)
-            .methods.receiveAirdrop(this.inviterAccount)
+            .methods.receiveAirdrop(toChecksumAddress(this.inviterAccount))
             .send({ from: this.address })
             .then(() => {
               this.loading = false;

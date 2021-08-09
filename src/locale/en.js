@@ -110,6 +110,8 @@ export default {
   "Please fill in the inviter's address":
     "Please fill in the inviter's address",
   "The inviter's address is wrong": "The inviter's address is wrong",
+  "The inviter's account cannot be yourself":
+    "The inviter's account cannot be yourself",
   "Received amount": "Received amount",
   "Please enter your mentor's address to open mystery box":
     "Please enter your mentor's address to open mystery box (Random 1-10000 DAO)",
