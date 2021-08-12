@@ -106,16 +106,21 @@ export default {
   "Receive airdrop": "Airdrop",
   "Cannot receive airdrops": "Cannot receive airdrops",
   "Inviter address": "Inviter address",
+  "Mentor's address": "Mentor's address",
+  "Identify code": "Identify code",
   Receive: "Receive",
   "Please fill in the inviter's address":
     "Please fill in the inviter's address",
   "The inviter's address is wrong": "The inviter's address is wrong",
+  "The mentor's address is wrong": "The mentor's address is wrong",
   "The inviter's account cannot be yourself":
     "The inviter's account cannot be yourself",
   "Received amount": "Received amount",
   "Please enter your mentor's address to open mystery box":
     "Please enter your mentor's address to open mystery box (Random 1-10000 DAO)",
   "Please enter your mentor's address": "Please enter your mentor's address",
+  "Please enter identify code": "Please enter identify code",
+  "The identify code is wrong": "The identify code is wrong",
   Open: "Open",
   "Already received or not qualify": "Already received or not qualify"
 };

@@ -14,14 +14,6 @@
                 </span>
               </v-card-title>
               <v-divider></v-divider>
-              <!-- <v-card-text v-if="!accountAssets.enableReceive">
-                <v-row align="center">
-                  <v-col class="display-3" cols="12">
-                    {{ $t("Already received or not qualify") }}
-                  </v-col>
-                </v-row>
-              </v-card-text>
-              <v-card-text v-else> -->
               <v-card-text>
                 <v-row align="center" v-if="accountAssets.isInvited">
                   <v-col class="display-3" cols="12">
@@ -50,6 +42,7 @@
                   </v-card-title>
                   <v-card-text>
                     <v-text-field
+                      :label="$t('Mentor\'s address')"
                       v-model="inviterAccount"
                       :error-messages="inviterAccountErrors"
                       required
@@ -57,6 +50,19 @@
                       @blur="$v.inviterAccount.$touch()"
                       :autofocus="inviterAccountFocus"
                     ></v-text-field>
+                    <v-text-field
+                      :label="$t('Identify code')"
+                      v-model="inputCode"
+                      :error-messages="inputCodeErrors"
+                      required
+                      @input="$v.inputCode.$touch()"
+                      @blur="$v.inputCode.$touch()"
+                      :autofocus="inputCodeFocus"
+                    >
+                      <div slot="append" @click="refreshCode">
+                        <s-identify :identifyCode="identifyCode"></s-identify>
+                      </div>
+                    </v-text-field>
                   </v-card-text>
                   <v-card-actions class="justify-center">
                     <v-btn
@@ -64,6 +70,7 @@
                       color="#93B954"
                       dark
                       width="80%"
+                      :disabled="!submitLoading"
                       @click="submit"
                     >
                       {{ $t("Open") }}
@@ -141,19 +148,22 @@ import clip from "@/utils/clipboard";
 import { AirdropContractAddress } from "@/constants";
 import {
   getContract,
-  // checkAddressChecksum,
+  checkAddressChecksum,
   toChecksumAddress,
   weiToEther
 } from "@/utils/web3";
 // 引入合约 ABI 文件
 import Airdrop from "@/constants/contractJson/Airdrop.json";
+import SIdentify from "@/components/SIdentify.vue";
 
 export default {
   name: "Airdrop",
   mixins: [validationMixin],
   validations: {
-    inviterAccount: { required }
+    inviterAccount: { required },
+    inputCode: { required }
   },
+  components: { SIdentify },
   data: () => ({
     loading: false,
     inviterAccountFocus: true,
@@ -170,12 +180,18 @@ export default {
       color: "success",
       snackbar: false,
       text: `Hello`
-    }
+    },
+    // 随机验证码
+    identifyCode: "",
+    identifyCodes: "0123456789abcdwerwshdjeJKDHRJHKOOPLMKQ", //随便
+    inputCodeFocus: false,
+    inputCode: undefined
   }),
   created() {
     if (this.web3 && this.connected) {
       this.getAccountAssets();
     }
+    this.refreshCode();
   },
   watch: {
     web3(web3) {
@@ -201,7 +217,7 @@ export default {
         errors.push(this.$t("Please enter your mentor's address"));
 
       try {
-        if (toChecksumAddress(this.$v.inviterAccount.$model)) {
+        if (checkAddressChecksum(this.$v.inviterAccount.$model)) {
           if (
             toChecksumAddress(this.$v.inviterAccount.$model) == this.address
           ) {
@@ -217,6 +233,26 @@ export default {
       }
 
       return errors;
+    },
+    inputCodeErrors() {
+      const errors = [];
+      if (!this.$v.inputCode.$dirty) return errors;
+      !this.$v.inputCode.required &&
+        errors.push(this.$t("Please enter identify code"));
+
+      if (this.$v.inputCode.$model !== this.identifyCode) {
+        errors.push(this.$t("The identify code is wrong"));
+      }
+
+      return errors;
+    },
+    submitLoading() {
+      return (
+        this.inviterAccount &&
+        this.inputCode &&
+        this.inviterAccountErrors.length <= 0 &&
+        this.inputCodeErrors.length <= 0
+      );
     }
   },
   methods: {
@@ -275,7 +311,13 @@ export default {
     async submit() {
       if (this.$v.$invalid) {
         // error info
-        this.inviterAccountFocus = true;
+        if (this.$v.inviterAccount.$invalid) {
+          this.inviterAccountFocus = true;
+        }
+        if (this.$v.inputCode.$invalid) {
+          this.inputCodeFocus = true;
+        }
+        this.$v.$touch();
       } else {
         this.$v.$touch();
         const contract = getContract(
@@ -308,7 +350,29 @@ export default {
           this.loading = false;
         }
       }
+    },
+    // 验证码相关
+    refreshCode() {
+      this.identifyCode = "";
+      this.makeCode(this.identifyCodes, 4);
+    },
+    randomNum(min, max) {
+      max = max + 1;
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+    // 随机生成验证码字符串
+    makeCode(data, len) {
+      for (let i = 0; i < len; i++) {
+        this.identifyCode += data[this.randomNum(0, data.length - 1)];
+      }
     }
   }
 };
 </script>
+
+<style lang="sass">
+.v-btn--disabled
+  background-color: rgb(147, 185, 84)
+  border-color: rgb(147, 185, 84)
+  opacity: 0.5
+</style>

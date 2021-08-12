@@ -12,8 +12,6 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    // component: Home
     component: () => import("@/layouts/home/Index.vue"),
     children: [
       {
