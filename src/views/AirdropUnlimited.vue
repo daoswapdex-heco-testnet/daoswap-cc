@@ -397,6 +397,11 @@ export default {
 </script>
 
 <style lang="sass">
+.theme--dark.v-btn.v-btn--disabled.v-btn--has-bg
+  background-color: rgb(147, 185, 84) !important
+  border-color: rgb(147, 185, 84) !important
+  opacity: 0.5 !important
+
 .v-btn--disabled
   background-color: rgb(147, 185, 84)
   border-color: rgb(147, 185, 84)
