@@ -344,15 +344,15 @@ export default {
           this.web3
         );
         this.loading = true;
-        // check account checkDaoBalance
-        const checkDaoBalance = await contract.methods
-          .checkDaoBalance(toChecksumAddress(this.inviterAccount))
+        // check account checkDatBalance
+        const checkDatBalance = await contract.methods
+          .checkDatBalance(toChecksumAddress(this.inviterAccount))
           .call();
         // check account checkDatStake
         const checkDatStake = await contract.methods
           .checkDatStake(toChecksumAddress(this.inviterAccount))
           .call();
-        if (checkDaoBalance || checkDatStake) {
+        if (checkDatBalance || checkDatStake) {
           // 执行合约
           getContract(
             AirdropUnlimited,
