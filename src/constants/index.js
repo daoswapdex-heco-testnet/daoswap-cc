@@ -8,7 +8,7 @@ export const AirdropContractAddress =
   "0xd257B93ACcffd9CecB60592402E132Bf0879a6c1";
 
 export const AirdropUnlimitedContractAddress =
-  "0xdFF9945b487537Da5cbEa836697a5F1558FfA73E";
+  "0x79f514E3baF4Bc7578e8ba5E0426b845d0f917Cc";
 
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 
