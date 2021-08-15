@@ -146,7 +146,7 @@ import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
 import clip from "@/utils/clipboard";
 import {
-  AirdropContractAddress,
+  // AirdropContractAddress,
   AirdropUnlimitedContractAddress
 } from "@/constants";
 import {
@@ -156,7 +156,6 @@ import {
   weiToEther
 } from "@/utils/web3";
 // 引入合约 ABI 文件
-import Airdrop from "@/constants/contractJson/Airdrop.json";
 import AirdropUnlimited from "@/constants/contractJson/AirdropUnlimited.json";
 import SIdentify from "@/components/SIdentify.vue";
 
@@ -280,34 +279,15 @@ export default {
       this.loading = true;
       try {
         // 查询白名单、空投列表
-        const contract = getContract(
-          Airdrop,
-          AirdropContractAddress,
-          this.web3
-        );
         const contractUnlimited = getContract(
           AirdropUnlimited,
           AirdropUnlimitedContractAddress,
           this.web3
         );
-        const hasAirdropList = await contract.methods
-          .hasAirdropList(this.address)
-          .call();
         const hasAirdropListUnlimited = await contractUnlimited.methods
           .hasAirdropList(this.address)
           .call();
-        if (hasAirdropList) {
-          this.accountAssets.isInvited = true;
-          const inviteInfo = await contract.methods
-            .airdropList(this.address)
-            .call();
-          this.accountAssets.inviterToken = inviteInfo.inviterToken;
-          this.accountAssets.airdropAmount = weiToEther(
-            inviteInfo.airdropAmount,
-            this.web3
-          );
-        } else if (hasAirdropListUnlimited) {
-          // if (hasAirdropListUnlimited) {
+        if (hasAirdropListUnlimited) {
           this.accountAssets.isInvited = true;
           const inviteInfo = await contractUnlimited.methods
             .airdropList(this.address)
@@ -363,10 +343,14 @@ export default {
             .send({ from: this.address })
             .then(() => {
               this.loading = false;
+              this.refreshCode();
+              this.inputCode = undefined;
               this.getAccountAssets();
             })
             .catch(e => {
               this.loading = false;
+              this.refreshCode();
+              this.inputCode = undefined;
               console.info(e);
             });
         } else {
@@ -374,6 +358,8 @@ export default {
           this.operationResult.snackbar = true;
           this.operationResult.text = "The mentor's address is wrong";
           this.loading = false;
+          this.refreshCode();
+          this.inputCode = undefined;
         }
       }
     },
