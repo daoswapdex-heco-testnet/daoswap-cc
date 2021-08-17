@@ -122,5 +122,10 @@ export default {
   "Please enter identify code": "Please enter identify code",
   "The identify code is wrong": "The identify code is wrong",
   Open: "Open",
-  "Already received or not qualify": "Already received or not qualify"
+  "Already received or not qualify": "Already received or not qualify",
+
+  Invite: "Invite",
+  Accept: "Accept",
+  "Inviter Address": "Inviter Address",
+  "You have accepted the invitation": "You have accepted the invitation"
 };

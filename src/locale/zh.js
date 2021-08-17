@@ -118,5 +118,10 @@ export default {
   "Please enter identify code": "请输入验证码",
   "The identify code is wrong": "验证码错误",
   Open: "打开",
-  "Already received or not qualify": "已领取或不符合领取空投条件"
+  "Already received or not qualify": "已领取或不符合领取空投条件",
+
+  Invite: "邀请",
+  Accept: "接受",
+  "Inviter Address": "邀请人地址",
+  "You have accepted the invitation": "您已经接受过邀请"
 };

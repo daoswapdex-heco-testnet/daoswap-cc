@@ -1,12 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Home from "../views/Home.vue";
 import CrowdsaleForAngel from "../views/CrowdsaleForAngel.vue";
 import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
-// import Airdrop from "../views/Airdrop.vue";
 import AirdropUnlimited from "../views/AirdropUnlimited.vue";
-import About from "../views/About.vue";
-import News from "../views/News.vue";
+import AirdropToRelationship from "../views/AirdropToRelationship.vue";
 
 Vue.use(VueRouter);
 
@@ -33,29 +30,13 @@ const routes = [
       {
         path: "/airdrop",
         name: "Airdrop",
-        component: AirdropUnlimited // Airdrop
-      },
-      // {
-      //   path: "/pe",
-      //   name: "PE",
-      //   component: CrowdsaleForRetail
-      // },
-      {
-        path: "/about",
-        name: "About",
-        component: About
+        component: AirdropUnlimited
       },
       {
-        path: "/news",
-        name: "News",
-        component: News
+        path: "/invite",
+        name: "Invite",
+        component: AirdropToRelationship
       }
-      // {
-      //   path: "pro",
-      //   name: "Pro",
-      //   component: () => import("@/views/pro/Index.vue"),
-      //   meta: { src: require("@/assets/pro.jpg") }
-      // }
     ]
   }
 ];
