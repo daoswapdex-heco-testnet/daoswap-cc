@@ -47,9 +47,7 @@
                 <form v-else>
                   <v-card-title>
                     <span class="headline">{{
-                      $t(
-                        "Please enter your mentor's address to open mystery box"
-                      )
+                      $t("Please enter your mentor's address")
                     }}</span>
                   </v-card-title>
                   <v-card-text>
