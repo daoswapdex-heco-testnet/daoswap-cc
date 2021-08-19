@@ -11,7 +11,7 @@ export const AirdropUnlimitedContractAddress =
   "0xdD8BcC712a2D7BD1EF912d029C0EAa88DfeBDe9f";
 
 export const AirdropToRelationshipContractAddress =
-  "0xe0f0D2422900Bf70b8fcfeA6f6e0A0eDf3BfedE8";
+  "0xF154318b83CE7EB7B95039ba51451e1E6fD53B83";
 
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 
