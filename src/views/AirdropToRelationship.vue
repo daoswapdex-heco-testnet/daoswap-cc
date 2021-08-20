@@ -181,7 +181,6 @@ export default {
     } else {
       this.onConnect();
     }
-    this.refreshCode();
   },
   watch: {
     web3(web3) {
