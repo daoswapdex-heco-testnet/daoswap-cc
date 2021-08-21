@@ -4,6 +4,7 @@ import CrowdsaleForAngel from "../views/CrowdsaleForAngel.vue";
 import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
 import AirdropUnlimited from "../views/AirdropUnlimited.vue";
 import AirdropToRelationship from "../views/AirdropToRelationship.vue";
+import AirdropForStake from "../views/AirdropForStake.vue";
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ const routes = [
         path: "/invite",
         name: "Invite",
         component: AirdropToRelationship
+      },
+      {
+        path: "/airdrop-stake",
+        name: "AirdropForStake",
+        component: AirdropForStake
       }
     ]
   }

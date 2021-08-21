@@ -16,25 +16,7 @@
               <v-divider></v-divider>
               <v-card-text>
                 <v-row align="center" v-if="accountAssets.isInvited">
-                  <v-col class="display-3" cols="12" v-if="isTransfer">
-                    <v-card-title>
-                      <span class="headline">{{ $t("Received amount") }}</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-row align="center">
-                        <v-col class="display-3" cols="12">
-                          {{ accountAssets.airdropAmount }}
-                          <span class="display-1">
-                            DAO
-                          </span>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-col>
-                  <v-col class="display-3" cols="12" v-else>
-                    <!-- <v-card-title>
-                      <span class="headline">{{ $t("Inviter Address") }}</span>
-                    </v-card-title> -->
+                  <v-col class="display-3" cols="12">
                     <v-card-text>
                       <v-row align="center">
                         <v-col class="display-3" cols="12">
@@ -163,10 +145,7 @@ export default {
     inviterAccount: undefined,
     // 当前账户相关信息
     accountAssets: {
-      isTransfer: false,
-      isInvited: false,
-      inviterToken: null,
-      airdropAmount: 0
+      isInvited: false
     },
     // 提示框
     operationResult: {
@@ -258,14 +237,6 @@ export default {
           .call();
         if (hasAirdropList) {
           this.accountAssets.isInvited = true;
-          // const inviteInfo = await contract.methods
-          //   .airdropList(this.address)
-          //   .call();
-          // this.accountAssets.inviterToken = inviteInfo.inviterToken;
-          // this.accountAssets.airdropAmount = weiToEther(
-          //   inviteInfo.airdropAmount,
-          //   this.web3
-          // );
         } else {
           this.accountAssets.isInvited = false;
         }

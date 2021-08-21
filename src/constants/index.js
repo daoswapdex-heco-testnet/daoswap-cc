@@ -13,6 +13,9 @@ export const AirdropUnlimitedContractAddress =
 export const AirdropToRelationshipContractAddress =
   "0xF154318b83CE7EB7B95039ba51451e1E6fD53B83";
 
+export const AirdropForStakeContractAddress =
+  "0x335cd079ca888533f21aAb5E506832e2aCCdC460";
+
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 
 export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";

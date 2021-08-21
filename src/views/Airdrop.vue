@@ -190,15 +190,10 @@ export default {
   created() {
     if (this.web3 && this.connected) {
       this.getAccountAssets();
+    } else {
+      this.onConnect();
     }
     this.refreshCode();
-  },
-  watch: {
-    web3(web3) {
-      if (web3) {
-        this.getAccountAssets();
-      }
-    }
   },
   computed: {
     connected() {
@@ -208,6 +203,7 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
+      this.getAccountAssets();
       return this.$store.state.web3.address;
     },
     inviterAccountErrors() {

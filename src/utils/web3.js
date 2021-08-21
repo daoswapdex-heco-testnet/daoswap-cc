@@ -16,9 +16,9 @@ async function subscribeProvider(provider) {
   provider.on("disconnect", () => {
     store.dispatch("web3/closeWallet");
   });
-  provider.on("accountsChanged", async () => {
-    // store.dispatch("web3/changeAddress", accounts[0]);
-    window.location.reload();
+  provider.on("accountsChanged", async accounts => {
+    store.dispatch("web3/changeAddress", accounts[0]);
+    // window.location.reload();
   });
   provider.on("chainChanged", () => {
     // store.dispatch("web3/changeChainId", chainId);

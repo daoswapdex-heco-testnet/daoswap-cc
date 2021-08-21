@@ -206,6 +206,7 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
+      this.getCrowdsaleInfo();
       return this.$store.state.web3.address;
     }
   },

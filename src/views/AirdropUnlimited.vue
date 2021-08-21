@@ -193,6 +193,8 @@ export default {
   created() {
     if (this.web3 && this.connected) {
       this.getAccountAssets();
+    } else {
+      this.onConnect();
     }
     this.refreshCode();
   },

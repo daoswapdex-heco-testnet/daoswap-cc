@@ -123,5 +123,10 @@ export default {
   Invite: "邀请",
   Accept: "接受",
   "Inviter Address": "邀请人地址",
-  "You have accepted the invitation": "您已经接受过邀请"
+  "You have accepted the invitation": "您已经接受过邀请",
+
+  AirdropForStake: "私募空投",
+  "Available airdrop amount": "可领取数量",
+  "You can't claim the airdrop": "您不能领取空投",
+  ReceiveAirdrop: "领取空投"
 };

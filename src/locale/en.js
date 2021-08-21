@@ -127,5 +127,10 @@ export default {
   Invite: "Invite",
   Accept: "Accept",
   "Inviter Address": "Inviter Address",
-  "You have accepted the invitation": "You have accepted the invitation"
+  "You have accepted the invitation": "You have accepted the invitation",
+
+  AirdropForStake: "AirdropForStake",
+  "Available airdrop amount": "Available airdrop amount",
+  "You can't claim the airdrop": "You can't claim the airdrop",
+  ReceiveAirdrop: "Receive Airdrop"
 };
