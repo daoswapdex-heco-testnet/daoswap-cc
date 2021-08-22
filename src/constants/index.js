@@ -1,8 +1,10 @@
 export const CrowdsaleForAngelContractAddress =
   "0x13ccaEFEe7D035cBeD83ffFAdCE0ba1F7a72b50D";
 
+// export const CrowdsaleForRetailContractAddress =
+//   "0x31202f1e8CE970D19DEDA3a12351c8F56074d89e";
 export const CrowdsaleForRetailContractAddress =
-  "0x31202f1e8CE970D19DEDA3a12351c8F56074d89e";
+  "0x6D28D5c3601Af59A4d4B1A8c4a3963b18B63602d";
 
 export const AirdropContractAddress =
   "0xd257B93ACcffd9CecB60592402E132Bf0879a6c1";
