@@ -132,5 +132,6 @@ export default {
   AirdropForStake: "AirdropForStake",
   "Available airdrop amount": "Available airdrop amount",
   "You can't claim the airdrop": "You can't claim the airdrop",
-  ReceiveAirdrop: "Receive Airdrop"
+  ReceiveAirdrop: "Receive Airdrop",
+  Amount: "Amount"
 };

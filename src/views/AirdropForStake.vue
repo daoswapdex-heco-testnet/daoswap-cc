@@ -11,7 +11,7 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-light">
-                  {{ $t("AirdropForStake") }}
+                  {{ $t("Airdrop") }}
                 </span>
               </v-card-title>
               <v-divider></v-divider>
@@ -26,9 +26,7 @@
                 >
                   <v-col class="display-3" cols="12">
                     <v-card-title>
-                      <span class="headline">{{
-                        $t("Available airdrop amount")
-                      }}</span>
+                      <span class="headline">{{ $t("Amount") }}</span>
                     </v-card-title>
                     <v-card-text>
                       <v-row align="center">
@@ -48,7 +46,7 @@
                         width="80%"
                         @click="handleReceiveAirdrop()"
                       >
-                        {{ $t("ReceiveAirdrop") }}
+                        {{ $t("Claim") }}
                       </v-btn>
                     </v-card-actions>
                   </v-col>
@@ -63,7 +61,7 @@
                 >
                   <v-col class="display-3" cols="12">
                     <v-card-title>
-                      <span class="headline">{{ $t("Received amount") }}</span>
+                      <span class="headline">{{ $t("Amount") }}</span>
                     </v-card-title>
                     <v-card-text>
                       <v-row align="center">
@@ -79,10 +77,10 @@
                 </v-row>
                 <!-- 不能领取 -->
                 <v-row align="center" v-else>
-                  <v-col class="display-3" cols="12">
+                  <v-col class="subtitle-1" cols="12">
                     <v-card-text>
                       <v-row align="center">
-                        <v-col class="display-3" cols="12">
+                        <v-col class="subtitle-1" cols="12">
                           {{ $t("You can't claim the airdrop") }}
                         </v-col>
                       </v-row>

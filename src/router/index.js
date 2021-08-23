@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import CrowdsaleForAngel from "../views/CrowdsaleForAngel.vue";
 import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
-import AirdropUnlimited from "../views/AirdropUnlimited.vue";
+// import AirdropUnlimited from "../views/AirdropUnlimited.vue";
 import AirdropToRelationship from "../views/AirdropToRelationship.vue";
 import AirdropForStake from "../views/AirdropForStake.vue";
 
@@ -31,17 +31,12 @@ const routes = [
       {
         path: "/airdrop",
         name: "Airdrop",
-        component: AirdropUnlimited
+        component: AirdropForStake
       },
       {
         path: "/invite",
         name: "Invite",
         component: AirdropToRelationship
-      },
-      {
-        path: "/airdrop-stake",
-        name: "AirdropForStake",
-        component: AirdropForStake
       }
     ]
   }
