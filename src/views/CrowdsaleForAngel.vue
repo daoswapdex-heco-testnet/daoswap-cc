@@ -196,7 +196,23 @@ export default {
     }
   }),
   created() {
-    this.getCrowdsaleInfo();
+    if (this.web3 && this.connected) {
+      this.getCrowdsaleInfo();
+    } else {
+      this.onConnect();
+    }
+  },
+  watch: {
+    web3(web3) {
+      if (web3) {
+        this.getCrowdsaleInfo();
+      }
+    },
+    address(address) {
+      if (address) {
+        this.getCrowdsaleInfo();
+      }
+    }
   },
   computed: {
     connected() {
@@ -206,7 +222,6 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
-      this.getCrowdsaleInfo();
       return this.$store.state.web3.address;
     }
   },

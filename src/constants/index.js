@@ -16,6 +16,9 @@ export const AirdropToRelationshipContractAddress =
 export const AirdropForStakeContractAddress =
   "0x2425F7014d3434a3f0f96639c59D03Abef1a27F0";
 
+export const AirdropForHoldDAOContractAddress =
+  "0x0524c166E89EE00018dA0733BFc146d9bA3acC70";
+
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 
 export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";
@@ -25,3 +28,7 @@ export const ZeroAddress = "0x0000000000000000000000000000000000000000";
 export const CHAIN_ID = process.env.VUE_APP_CHAIN_ID || 128;
 
 export const NETWORK_ID = process.env.VUE_APP_NETWORK_ID || 128;
+
+export const FACTORY_ADDRESS = "0x2216574F455CCc9E5FF9384Bbbd24e47c569CF67";
+
+export const BUNDLE_ID = "1";

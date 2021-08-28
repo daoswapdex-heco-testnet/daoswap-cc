@@ -133,5 +133,7 @@ export default {
   "Available airdrop amount": "Available airdrop amount",
   "You can't claim the airdrop": "You can't claim the airdrop",
   ReceiveAirdrop: "Receive Airdrop",
-  Amount: "Amount"
+  Amount: "Amount",
+
+  AirdropHolder: "AirdropHolder"
 };

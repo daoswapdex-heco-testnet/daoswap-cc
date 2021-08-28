@@ -129,5 +129,7 @@ export default {
   "Available airdrop amount": "可领取数量",
   "You can't claim the airdrop": "您不能领取空投",
   ReceiveAirdrop: "领取空投",
-  Amount: "数量"
+  Amount: "数量",
+
+  AirdropHolder: "持币空投"
 };

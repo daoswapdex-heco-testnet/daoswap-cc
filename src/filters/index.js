@@ -5,6 +5,7 @@ export {
   formatSeconds,
   formatCountdown
 } from "@/utils/utilities";
+export { formattedNum } from "./web3";
 
 /**
  * Show plural label if time is plural number
