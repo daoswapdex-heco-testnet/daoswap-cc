@@ -193,8 +193,7 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
-      return "0xBdB9BD48CDCF075D66f81f083b9Ab618a0530c31";
-      // return this.$store.state.web3.address;
+      return this.$store.state.web3.address;
     }
   },
   methods: {
