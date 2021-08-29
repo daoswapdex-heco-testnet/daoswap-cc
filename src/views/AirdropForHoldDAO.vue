@@ -235,39 +235,45 @@ export default {
           AirdropForHoldDAOContractAddress,
           web3
         );
-        // 查询是否可以领取空投
-        const airdropInfo = await contract.methods
-          .airdropList(this.address)
+        // 查询账号余额
+        const checkBalance = await contract.methods
+          .checkDAOBalance(this.address)
           .call();
-        if (airdropInfo.isClaim) {
-          this.accountAssets.isClaim = true;
-          this.accountAssets.enableAirdrop = false;
-          this.accountAssets.airdropAmount = airdropInfo.airdropAmount;
-        } else {
-          // 查询交易量
-          const swappedResult = await client.query({
-            query: USER_TRANSACTIONS,
-            variables: {
-              user: this.address
-            },
-            fetchPolicy: "no-cache"
-          });
-          let tempSwappedAmount = 0;
-          if (swappedResult?.data) {
-            tempSwappedAmount = swappedResult.data?.swaps
-              ? swappedResult.data?.swaps.reduce((total, swap) => {
-                  return total + parseFloat(swap.amountUSD);
-                }, 0)
-              : 0;
-          }
-          this.accountAssets.swappedAmount = formattedNum(tempSwappedAmount);
-          if (this.accountAssets.swappedAmount > 0) {
-            // 查询是否可以领取空投
-            const minSwappedAmount = await contract.methods
-              .minDAOSwappedAmount()
-              .call();
-            if (this.accountAssets.swappedAmount >= minSwappedAmount) {
-              this.accountAssets.enableAirdrop = true;
+        if (checkBalance) {
+          // 查询是否可以领取空投
+          const airdropInfo = await contract.methods
+            .airdropList(this.address)
+            .call();
+          if (airdropInfo.isClaim) {
+            this.accountAssets.isClaim = true;
+            this.accountAssets.enableAirdrop = false;
+            this.accountAssets.airdropAmount = airdropInfo.airdropAmount;
+          } else {
+            // 查询交易量
+            const swappedResult = await client.query({
+              query: USER_TRANSACTIONS,
+              variables: {
+                user: this.address
+              },
+              fetchPolicy: "no-cache"
+            });
+            let tempSwappedAmount = 0;
+            if (swappedResult?.data) {
+              tempSwappedAmount = swappedResult.data?.swaps
+                ? swappedResult.data?.swaps.reduce((total, swap) => {
+                    return total + parseFloat(swap.amountUSD);
+                  }, 0)
+                : 0;
+            }
+            this.accountAssets.swappedAmount = formattedNum(tempSwappedAmount);
+            if (this.accountAssets.swappedAmount > 0) {
+              // 查询是否可以领取空投
+              const minSwappedAmount = await contract.methods
+                .minDAOSwappedAmount()
+                .call();
+              if (this.accountAssets.swappedAmount >= minSwappedAmount) {
+                this.accountAssets.enableAirdrop = true;
+              }
             }
           }
         }
