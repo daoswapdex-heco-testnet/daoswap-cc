@@ -285,7 +285,7 @@ export default {
         AirdropForHoldDAOContractAddress,
         this.web3
       )
-        .methods.receiveAirdrop(this.accountAssets.swappedAmount)
+        .methods.receiveAirdrop(Math.round(this.accountAssets.swappedAmount))
         .send({ from: this.address })
         .then(() => {
           this.loading = false;
