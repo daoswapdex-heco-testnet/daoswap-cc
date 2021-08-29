@@ -141,7 +141,7 @@
 <script>
 import clip from "@/utils/clipboard";
 import { AirdropForHoldDAOContractAddress } from "@/constants";
-import { getContract } from "@/utils/web3";
+import { getContract, weiToEther } from "@/utils/web3";
 import { client } from "@/apollo/client";
 import { USER_TRANSACTIONS } from "@/apollo/queries";
 import { formattedNum } from "@/filters/web3";
@@ -235,7 +235,10 @@ export default {
           if (airdropInfo.isClaim) {
             this.accountAssets.isClaim = true;
             this.accountAssets.enableAirdrop = false;
-            this.accountAssets.airdropAmount = airdropInfo.airdropAmount;
+            this.accountAssets.airdropAmount = weiToEther(
+              airdropInfo.airdropAmount,
+              this.web3
+            );
           } else {
             // 查询交易量
             const swappedResult = await client.query({
