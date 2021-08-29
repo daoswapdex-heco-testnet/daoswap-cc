@@ -266,7 +266,7 @@ export default {
             const minSwappedAmount = await contract.methods
               .minDAOSwappedAmount()
               .call();
-            if (this.accountAssets.swappedAmount > minSwappedAmount) {
+            if (this.accountAssets.swappedAmount >= minSwappedAmount) {
               this.accountAssets.enableAirdrop = true;
             }
           }
@@ -285,7 +285,7 @@ export default {
         AirdropForHoldDAOContractAddress,
         this.web3
       )
-        .methods.receiveAirdrop()
+        .methods.receiveAirdrop(this.accountAssets.swappedAmount)
         .send({ from: this.address })
         .then(() => {
           this.loading = false;
