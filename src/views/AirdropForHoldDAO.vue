@@ -23,19 +23,6 @@
                   v-if="!accountAssets.isClaim && accountAssets.enableAirdrop"
                 >
                   <v-col class="display-3" cols="12">
-                    <!-- <v-card-title>
-                      <span class="headline">{{ $t("Amount") }}</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-row align="center">
-                        <v-col class="display-3" cols="12">
-                          {{ accountAssets.airdropAmount }}
-                          <span class="display-1">
-                            DAO
-                          </span>
-                        </v-col>
-                      </v-row>
-                    </v-card-text> -->
                     <v-card-actions class="justify-center">
                       <v-btn
                         large
@@ -53,7 +40,7 @@
                 <v-row
                   align="center"
                   v-else-if="
-                    accountAssets.isClaim && accountAssets.enableAirdrop
+                    accountAssets.isClaim && !accountAssets.enableAirdrop
                   "
                 >
                   <v-col class="display-3" cols="12">
@@ -206,7 +193,8 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
-      return this.$store.state.web3.address;
+      return "0xBdB9BD48CDCF075D66f81f083b9Ab618a0530c31";
+      // return this.$store.state.web3.address;
     }
   },
   methods: {
