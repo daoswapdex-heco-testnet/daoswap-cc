@@ -23,7 +23,7 @@
                   v-if="!accountAssets.isClaim && accountAssets.enableAirdrop"
                 >
                   <v-col class="display-3" cols="12">
-                    <v-card-title>
+                    <!-- <v-card-title>
                       <span class="headline">{{ $t("Amount") }}</span>
                     </v-card-title>
                     <v-card-text>
@@ -35,7 +35,7 @@
                           </span>
                         </v-col>
                       </v-row>
-                    </v-card-text>
+                    </v-card-text> -->
                     <v-card-actions class="justify-center">
                       <v-btn
                         large
