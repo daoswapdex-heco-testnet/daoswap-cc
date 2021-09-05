@@ -131,5 +131,6 @@ export default {
   ReceiveAirdrop: "领取空投",
   Amount: "数量",
 
-  AirdropHolder: "持币空投"
+  AirdropHolder: "持币空投",
+  "Receive Success": "领取成功"
 };

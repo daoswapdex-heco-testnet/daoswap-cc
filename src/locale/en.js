@@ -135,5 +135,6 @@ export default {
   ReceiveAirdrop: "Receive Airdrop",
   Amount: "Amount",
 
-  AirdropHolder: "AirdropHolder"
+  AirdropHolder: "AirdropHolder",
+  "Receive Success": "Receive Success"
 };

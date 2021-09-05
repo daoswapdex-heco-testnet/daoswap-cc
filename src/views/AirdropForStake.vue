@@ -268,7 +268,7 @@ export default {
         .then(() => {
           this.loading = false;
           this.operationResult.snackbar = true;
-          this.operationResult.text = "Crowdsale Success";
+          this.operationResult.text = "Receive Success";
           this.getAccountAssets();
         })
         .catch(e => {
