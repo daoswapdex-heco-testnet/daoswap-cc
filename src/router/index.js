@@ -2,10 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import CrowdsaleForAngel from "../views/CrowdsaleForAngel.vue";
 import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
-// import AirdropUnlimited from "../views/AirdropUnlimited.vue";
 import AirdropToRelationship from "../views/AirdropToRelationship.vue";
 import AirdropForStake from "../views/AirdropForStake.vue";
 import AirdropForHoldDAO from "../views/AirdropForHoldDAO.vue";
+import BurnForging from "../views/chn/BurnForging.vue";
+import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
 
 Vue.use(VueRouter);
 
@@ -40,9 +41,31 @@ const routes = [
         component: AirdropForHoldDAO
       },
       {
+        path: "/chn",
+        name: "CHN",
+        redirect: "/chn/node",
+        component: () => import("@/layouts/home/View.vue"),
+        children: [
+          {
+            path: "/chn/node",
+            name: "CHNNode",
+            component: BurnForging
+          },
+          {
+            path: "/chn/forging/history",
+            name: "BurnForgingHistory",
+            component: BurnForgingHistory
+          }
+        ]
+      },
+      {
         path: "/invite",
         name: "Invite",
         component: AirdropToRelationship
+      },
+      {
+        path: "*",
+        redirect: "/"
       }
     ]
   }

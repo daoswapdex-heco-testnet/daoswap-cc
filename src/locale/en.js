@@ -95,6 +95,7 @@ export default {
   "hour ago": "hour ago",
   "1 day ago": "1 day ago",
   months: "months",
+  weeks: "weeks",
   days: "days",
   hours: "hours",
   minutes: "minutes",
@@ -136,5 +137,42 @@ export default {
   Amount: "Amount",
 
   AirdropHolder: "AirdropHolder",
-  "Receive Success": "Receive Success"
+  "Receive Success": "Receive Success",
+
+  CHN: "CHN",
+  "Current forging to be released": "Current forging to be released",
+  "Hash power node (NH) status": "Hash power node (NH) status",
+  "Forging event has ended": "Forging event has ended",
+  Node: {
+    None: "None",
+    "Planetary node": "Planetary node",
+    "Stellar node": "Stellar node"
+  },
+  "Choose a forging pool": "Choose a forging pool",
+  "Enter the forging amount": "Enter the forging amount",
+  "At least": "At least",
+  BurnForging: "BurnForging",
+  BurnForgingForm: {
+    "BurnForging Amount": "BurnForging Amount",
+    "The amount exceeds the balance": "The amount exceeds the balance",
+    "The amount exceeds the max forgeable amount":
+      "The amount exceeds the max forgeable amount",
+    "The amount is be gt zero": "The amount is be gt zero",
+    "Invalid amount": "Invalid amount",
+    "The amount is required": "The amount is required",
+    "The amount does not meet the requirements":
+      "The amount does not meet the requirements",
+    "Invalid duration": "Invalid duration",
+    "The duration is required": "The duration is required"
+  },
+  Rate: "Rate",
+  Available: "Available",
+  "Forging Success": "Forging Success",
+  "Forging History": "Forging History",
+  "Forging Amount": "Forging Amount",
+  "Receive Amount": "Receive Amount",
+  "CHN Duration": "CHN Duration",
+  "Releasable Amount": "Releasable Amount",
+  "Released Amount": "Released Amount",
+  Operation: "Operation"
 };

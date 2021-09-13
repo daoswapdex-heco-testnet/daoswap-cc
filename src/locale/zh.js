@@ -93,9 +93,10 @@ export default {
   "hour ago": "小时前",
   "1 day ago": "1天前",
   months: "月",
+  weeks: "周",
   days: "天",
   hours: "时",
-  minutes: "分",
+  minutes: "分钟",
   seconds: "秒",
 
   "Stake not started": "活动未开始",
@@ -132,5 +133,40 @@ export default {
   Amount: "数量",
 
   AirdropHolder: "持币空投",
-  "Receive Success": "领取成功"
+  "Receive Success": "领取成功",
+
+  CHN: "CHN",
+  "Current forging to be released": "当前锻造待释放",
+  "Hash power node (NH) status": "算力节点(NH)状态",
+  "Forging event has ended": "锻造活动已结束",
+  Node: {
+    None: "无",
+    "Planetary node": "行星节点",
+    "Stellar node": "恒星节点"
+  },
+  "Choose a forging pool": "选择锻造矿池",
+  "Enter the forging amount": "输入锻造额度",
+  "At least": "最少",
+  BurnForging: "锻造",
+  BurnForgingForm: {
+    "BurnForging Amount": "锻造额度",
+    "The amount exceeds the balance": "金额超过可账户余额",
+    "The amount exceeds the max forgeable amount": "金额超过最大可锻造额度",
+    "The amount is be gt zero": "锻造额度必须大于0",
+    "Invalid amount": "不可用的数值",
+    "The amount is required": "请填写锻造额度",
+    "The amount does not meet the requirements": "锻造额度不符合要求",
+    "Invalid duration": "不可用的周期",
+    "The duration is required": "请选择周期"
+  },
+  Rate: "比例",
+  Available: "可得",
+  "Forging Success": "锻造成功",
+  "Forging History": "查看锻造记录",
+  "Forging Amount": "锻造数量",
+  "Receive Amount": "得到数量",
+  "CHN Duration": "矿池周期",
+  "Releasable Amount": "待释放",
+  "Released Amount": "已释放",
+  Operation: "操作"
 };
