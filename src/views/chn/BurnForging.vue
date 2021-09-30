@@ -17,7 +17,7 @@
                   <p>
                     {{
                       $t("Current forging to be released") + " " + tokenSymbol
-                    }}：{{ accountAssets.releasableAmount }}
+                    }}：{{ accountAssets.toBeReleasableAmount }}
                   </p>
                   <p>
                     {{ $t("Hash power node (NH) status") }}：{{
@@ -136,6 +136,17 @@
                   {{ $t("Forging History") }}
                 </v-btn>
               </v-card-actions>
+              <v-card-actions class="justify-center">
+                <v-btn
+                  large
+                  width="80%"
+                  outlined
+                  color="#93B954"
+                  @click="gotoPower"
+                >
+                  {{ $t("Computing power mining") }}
+                </v-btn>
+              </v-card-actions>
             </v-card-text>
           </v-card>
           <!-- 当前钱包账号 -->
@@ -207,9 +218,11 @@ import { required, decimal } from "vuelidate/lib/validators";
 import clip from "@/utils/clipboard";
 import { DAOAddress, BecomeCGNContractAddress } from "@/constants";
 import { getContract, weiToEther, etherToWei } from "@/utils/web3";
+import { judgeCHNNodeType } from "@/filters/index";
 // 引入合约 ABI 文件
 import ERC20DAO from "@/constants/contractJson/ERC20DAO.json";
 import BecomeCGN from "@/constants/contractJson/BecomeCGN.json";
+import TokenVestingBurnForging from "@/constants/contractJson/TokenVestingBurnForging.json";
 
 export default {
   name: "BurnForging",
@@ -230,7 +243,7 @@ export default {
     accountAssets: {
       balance: 0,
       allowanceAmount: 0, // 已授权额度
-      releasableAmount: 0,
+      toBeReleasableAmount: 0,
       nodeName: "None"
     },
     // 合约数据
@@ -246,7 +259,7 @@ export default {
       days: 86400,
       weeks: 604800
     },
-    nodeDisplay: [10, 20],
+    nodeDisplay: [10, 20, 30],
     nodeList: [],
     // 提示框
     operationResult: {
@@ -393,26 +406,31 @@ export default {
           });
         });
         // 查询释放合约数据
-        this.accountAssets.releasableAmount = 0;
+        this.accountAssets.toBeReleasableAmount = 0;
         this.accountAssets.nodeName = "None";
         const vestingAddress = await contract.methods
           .getTokenVestingAddressByAccount(this.address)
           .call();
         const getResult = vestingAddress.map(async item => {
-          const balance = await contractERC20DAO.methods.balanceOf(item).call();
-          const balanceFormat = weiToEther(balance, this.web3);
-          this.accountAssets.releasableAmount =
-            this.accountAssets.releasableAmount + balanceFormat * 1;
+          const contractTokenVestingBurnForging = getContract(
+            TokenVestingBurnForging,
+            item,
+            this.web3
+          );
+          const toBeReleasableAmount = await contractTokenVestingBurnForging.methods
+            .toBeReleasableAmount(DAOAddress)
+            .call();
+          const toBeReleasableAmountFormat = weiToEther(
+            toBeReleasableAmount,
+            this.web3
+          );
+          this.accountAssets.toBeReleasableAmount +=
+            toBeReleasableAmountFormat * 1;
         });
         await Promise.all(getResult);
-        if (
-          this.accountAssets.releasableAmount >= 10 &&
-          this.accountAssets.releasableAmount < 20
-        ) {
-          this.accountAssets.nodeName = "Planetary node";
-        } else if (this.accountAssets.releasableAmount >= 20) {
-          this.accountAssets.nodeName = "Stellar node";
-        }
+        this.accountAssets.nodeName = judgeCHNNodeType(
+          this.accountAssets.toBeReleasableAmount
+        );
       } catch (error) {
         console.info(error);
       }
@@ -476,6 +494,10 @@ export default {
     // 跳转历史记录
     gotoHistory() {
       this.$router.push({ path: "/chn/forging/history" });
+    },
+    // 跳转算力挖矿
+    gotoPower() {
+      this.$router.push({ path: "/chn/power/mining" });
     }
   }
 };

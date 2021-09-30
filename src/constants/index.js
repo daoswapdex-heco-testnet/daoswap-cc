@@ -4,6 +4,9 @@ export const CrowdsaleForAngelContractAddress =
 export const CrowdsaleForRetailContractAddress =
   "0x6D28D5c3601Af59A4d4B1A8c4a3963b18B63602d";
 
+export const CrowdsaleForRetailContractAddress2 =
+  "0x4263A9fFeb51D31ffF7715C89EafD7612D3BC5e9";
+
 export const AirdropContractAddress =
   "0xd257B93ACcffd9CecB60592402E132Bf0879a6c1";
 
@@ -20,7 +23,7 @@ export const AirdropForHoldDAOContractAddress =
   "0x407849b0f6E37f1c728b91FDd4bb13f6945874f0";
 
 export const BecomeCGNContractAddress =
-  "0x2E95827534a522E292d44e16e7F922E20439b371";
+  "0x663c0d4B16Dad6A633238A3321b98AF5794f00C6";
 
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 

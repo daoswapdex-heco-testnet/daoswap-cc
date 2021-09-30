@@ -139,6 +139,13 @@ export default {
   AirdropHolder: "AirdropHolder",
   "Receive Success": "Receive Success",
 
+  "coming soon": "coming soon",
+
+  "First stake period is ended, please wait for second period.":
+    "First stake period is ended, please wait for second period.",
+  "Stake History": "Stake History",
+  "First stake": "Phase 1",
+
   CHN: "CHN",
   "Current forging to be released": "Current forging to be released",
   "Hash power node (NH) status": "Hash power node (NH) status",
@@ -174,5 +181,11 @@ export default {
   "CHN Duration": "CHN Duration",
   "Releasable Amount": "Releasable Amount",
   "Released Amount": "Released Amount",
-  Operation: "Operation"
+  Operation: "Operation",
+
+  "Computing power mining": "Computing power mining",
+  "Power Column Duration": "Duration",
+  "Power Column Power": "Power",
+  "Power Column ClaimableAmount": "Claimable Amount",
+  "Power Column AnnualizedRate": "Annualized Rate"
 };

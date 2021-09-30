@@ -78,3 +78,16 @@ export function toThousandFilter(num) {
 export function uppercaseFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/**
+ * 判断节点类型
+ */
+export function judgeCHNNodeType(value) {
+  if (value > 10 && value <= 20) {
+    return "Planetary node";
+  } else if (value > 20) {
+    return "Stellar node";
+  } else {
+    return "None";
+  }
+}

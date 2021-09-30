@@ -135,6 +135,13 @@ export default {
   AirdropHolder: "持币空投",
   "Receive Success": "领取成功",
 
+  "coming soon": "空投已结束，请期待下一期！",
+
+  "First stake period is ended, please wait for second period.":
+    "第一阶段质押DAT已经结束了。第二阶段近期就重新开始。各位的DAT仍有效，请耐心等待第二阶段开启后再质押。",
+  "Stake History": "活动历史",
+  "First stake": "第一期",
+
   CHN: "CHN",
   "Current forging to be released": "当前锻造待释放",
   "Hash power node (NH) status": "算力节点(NH)状态",
@@ -168,5 +175,11 @@ export default {
   "CHN Duration": "矿池周期",
   "Releasable Amount": "待释放",
   "Released Amount": "已释放",
-  Operation: "操作"
+  Operation: "操作",
+
+  "Computing power mining": "算力挖矿",
+  "Power Column Duration": "周期",
+  "Power Column Power": "算力",
+  "Power Column ClaimableAmount": "可提取",
+  "Power Column AnnualizedRate": "年化率"
 };

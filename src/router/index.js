@@ -1,12 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import CrowdsaleForAngel from "../views/CrowdsaleForAngel.vue";
 import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
+import CrowdsaleForRetail2 from "../views/CrowdsaleForRetail2.vue";
+import CrowdsaleForRetailEnd from "../views/CrowdsaleForRetailEnd.vue";
 import AirdropToRelationship from "../views/AirdropToRelationship.vue";
 import AirdropForStake from "../views/AirdropForStake.vue";
 import AirdropForHoldDAO from "../views/AirdropForHoldDAO.vue";
 import BurnForging from "../views/chn/BurnForging.vue";
 import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
+import ComputingPowerMining from "../views/chn/ComputingPowerMining.vue";
 
 Vue.use(VueRouter);
 
@@ -21,14 +23,27 @@ const routes = [
         component: () => import("@/views/home/Index.vue")
       },
       {
-        path: "/angel",
-        name: "Angel",
-        component: CrowdsaleForAngel
-      },
-      {
         path: "/stake",
         name: "Stake",
-        component: CrowdsaleForRetail
+        redirect: "/stake/period-2",
+        component: () => import("@/layouts/home/View.vue"),
+        children: [
+          {
+            path: "/stake/end",
+            name: "StakeEnd",
+            component: CrowdsaleForRetailEnd
+          },
+          {
+            path: "/stake/period-1",
+            name: "StakePeriod1",
+            component: CrowdsaleForRetail
+          },
+          {
+            path: "/stake/period-2",
+            name: "StakePeriod2",
+            component: CrowdsaleForRetail2
+          }
+        ]
       },
       {
         path: "/airdrop",
@@ -55,6 +70,11 @@ const routes = [
             path: "/chn/forging/history",
             name: "BurnForgingHistory",
             component: BurnForgingHistory
+          },
+          {
+            path: "/chn/power/mining",
+            name: "ComputingPowerMining",
+            component: ComputingPowerMining
           }
         ]
       },

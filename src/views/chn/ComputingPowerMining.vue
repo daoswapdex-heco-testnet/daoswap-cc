@@ -17,7 +17,7 @@
                   <p>
                     {{
                       $t("Current forging to be released") + " " + tokenSymbol
-                    }}：{{ accountAssets.toBeReleasableAmount }}
+                    }}：{{ accountAssets.releasableAmount }}
                   </p>
                   <p>
                     {{ $t("Hash power node (NH) status") }}：{{
@@ -36,7 +36,7 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-light">
-                  {{ $t("Forging History") }}
+                  {{ $t("Computing power mining") }}
                 </span>
               </v-card-title>
               <v-divider></v-divider>
@@ -45,37 +45,38 @@
                   <template v-slot:default>
                     <thead>
                       <tr>
-                        <th class="text-left">{{ $t("Forging Amount") }}</th>
-                        <th class="text-left">{{ $t("Receive Amount") }}</th>
-                        <th class="text-left">{{ $t("CHN Duration") }}</th>
                         <th class="text-left">
-                          {{ $t("Releasable Amount") }} {{ tokenSymbol }}
+                          {{ $t("Power Column Duration") }}
                         </th>
                         <th class="text-left">
-                          {{ $t("Released Amount") }} {{ tokenSymbol }}
+                          {{ $t("Power Column Power") }}<br />(USDT)
                         </th>
-                        <th class="text-left">{{ $t("Start") }}</th>
+                        <th class="text-left">
+                          {{ $t("Power Column ClaimableAmount") }}<br />({{
+                            tokenSymbol
+                          }})
+                        </th>
+                        <th class="text-left">
+                          {{ $t("Power Column AnnualizedRate") }}
+                        </th>
                         <th class="text-left">{{ $t("Operation") }}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr
-                        v-for="item in vestingAddressList"
-                        :key="item.duration"
-                      >
-                        <td>{{ item.burnedAmount }}</td>
-                        <td>{{ item.receiveAmount }}</td>
-                        <td>{{ item.duration | formatSeconds() }}</td>
-                        <td>{{ item.releasableAmount }}</td>
-                        <td>{{ item.released }}</td>
+                      <tr v-for="item in powerDataList" :key="item.duration">
                         <td>
-                          {{
-                            item.start | parseTime("{y}-{m}-{d} {h}:{i}:{s}")
-                          }}
+                          {{ item.startTime | parseTime("{y}{m}{d}") }}
+                          {{ $t("to") }}
+                          {{ item.endTime | parseTime("{y}{m}{d}") }}
                         </td>
+                        <td>{{ item.powerInfo.power }}</td>
+                        <td>{{ item.powerInfo.receiveAmount }}</td>
+                        <td>{{ item.annualizedRate }}</td>
                         <td>
                           <v-btn
-                            v-if="item.releasableAmount > 0"
+                            v-if="
+                              item.powerInfo.receiveAmount > 0 && !item.isClaim
+                            "
                             small
                             color="#93B954"
                             dark
@@ -159,23 +160,25 @@
 import clip from "@/utils/clipboard";
 import { DAOAddress, BecomeCGNContractAddress } from "@/constants";
 import { getContract, weiToEther } from "@/utils/web3";
-import { judgeCHNNodeType } from "@/filters/index";
 // 引入合约 ABI 文件
+import ERC20DAO from "@/constants/contractJson/ERC20DAO.json";
 import BecomeCGN from "@/constants/contractJson/BecomeCGN.json";
-import TokenVestingBurnForging from "@/constants/contractJson/TokenVestingBurnForging.json";
+import ComputingPowerMining from "@/constants/contractJson/ComputingPowerMining.json";
 
 export default {
-  name: "BurnForgingHistory",
+  name: "ComputingPowerMining",
   data: () => ({
     loading: false,
     tokenSymbol: "DAO",
     // 当前账户相关信息
     accountAssets: {
-      toBeReleasableAmount: 0,
+      releasableAmount: 0,
       nodeName: "None"
     },
-    // 释放合约列表
-    vestingAddressList: [],
+    // 算力合约列表
+    powerContractAddressList: ["0x876991E5AAe1Ad7E95C0F7e238D664a993330b7B"],
+    // 算力数据列表
+    powerDataList: [],
     // 提示框
     operationResult: {
       color: "success",
@@ -210,6 +213,7 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
+      // return "0x3DdcFc89B4DD2b33d9a8Ca0F60180527E9810D4B";
       return this.$store.state.web3.address;
     }
   },
@@ -234,6 +238,7 @@ export default {
       this.loading = true;
       try {
         // 查询节点信息
+        const contractERC20DAO = getContract(ERC20DAO, DAOAddress, this.web3);
         const contract = getContract(
           BecomeCGN,
           BecomeCGNContractAddress,
@@ -243,57 +248,83 @@ export default {
           .getTokenVestingAddressByAccount(this.address)
           .call();
         // 生成列表
-        this.vestingAddressList = [];
-        this.accountAssets.toBeReleasableAmount = 0;
+        this.accountAssets.releasableAmount = 0;
         this.accountAssets.nodeName = "None";
         const getResult = vestingAddress.map(async item => {
-          const contract = await getContract(
-            TokenVestingBurnForging,
-            item,
-            this.web3
-          );
-          const burner = await contract.methods.burner().call();
-          const released = await contract.methods.released(DAOAddress).call();
-          const start = await contract.methods.start().call();
-          const duration = await contract.methods.duration().call();
-          const burnedAmount = await contract.methods.burnedAmount().call();
-          const receiveAmount = await contract.methods.receiveAmount().call();
-          const releasableAmount = await contract.methods
-            .releasableAmount(DAOAddress)
-            .call();
-          const toBeReleasableAmount = await contract.methods
-            .toBeReleasableAmount(DAOAddress)
-            .call();
-          const tempVesting = {
-            contractAddress: item,
-            burner: burner,
-            released: weiToEther(released, this.web3),
-            start: start,
-            duration: duration,
-            releasableAmount: weiToEther(releasableAmount, this.web3),
-            toBeReleasableAmount: weiToEther(toBeReleasableAmount, this.web3),
-            burnedAmount: weiToEther(burnedAmount, this.web3),
-            receiveAmount: weiToEther(receiveAmount, this.web3)
-          };
-          this.vestingAddressList.push(tempVesting);
-          this.accountAssets.toBeReleasableAmount +=
-            tempVesting.toBeReleasableAmount * 1;
+          // 查询余额
+          const balance = await contractERC20DAO.methods.balanceOf(item).call();
+          const balanceFormat = weiToEther(balance, this.web3);
+          this.accountAssets.releasableAmount =
+            this.accountAssets.releasableAmount + balanceFormat * 1;
         });
         await Promise.all(getResult);
-        this.accountAssets.nodeName = judgeCHNNodeType(
-          this.accountAssets.toBeReleasableAmount
-        );
+        if (
+          this.accountAssets.releasableAmount >= 10 &&
+          this.accountAssets.releasableAmount < 20
+        ) {
+          this.accountAssets.nodeName = "Planetary node";
+        } else if (this.accountAssets.releasableAmount >= 20) {
+          this.accountAssets.nodeName = "Stellar node";
+        }
+        await this.getPowerDataList();
       } catch (error) {
         console.info(error);
       }
       this.loading = false;
     },
+    // 获取算力数据列表
+    async getPowerDataList() {
+      if (this.powerContractAddressList.length > 0) {
+        this.loading = true;
+        const getResult = this.powerContractAddressList.map(async item => {
+          const contract = await getContract(
+            ComputingPowerMining,
+            item,
+            this.web3
+          );
+          const hasPowerInfo = await contract.methods
+            .hasPowerInfo(this.address)
+            .call();
+          if (hasPowerInfo) {
+            const totalReleaseAmount = await contract.methods
+              .totalReleaseAmount()
+              .call();
+            const totalSwappedAmount = await contract.methods
+              .totalSwappedAmount()
+              .call();
+            const countedPower = await contract.methods.countedPower().call();
+            const startTime = await contract.methods.startTime().call();
+            const endTime = await contract.methods.endTime().call();
+            const powerInfo = await contract.methods
+              .accountPowerInfoList(this.address)
+              .call();
+            const tempData = {
+              contractAddress: item,
+              totalReleaseAmount: weiToEther(totalReleaseAmount, this.web3),
+              totalSwappedAmount: weiToEther(totalSwappedAmount, this.web3),
+              countedPower: weiToEther(countedPower, this.web3),
+              startTime: startTime,
+              endTime: endTime,
+              powerInfo: {
+                power: weiToEther(powerInfo.power, this.web3),
+                receiveAmount: weiToEther(powerInfo.receiveAmount, this.web3),
+                isClaim: powerInfo.isClaim
+              },
+              annualizedRate: powerInfo.power / powerInfo.receiveAmount
+            };
+            this.powerDataList.push(tempData);
+          }
+        });
+        await Promise.all(getResult);
+        this.loading = true;
+      }
+    },
     // 提取DAO
     handleRelease(record) {
       this.loading = true;
       // 执行合约
-      getContract(TokenVestingBurnForging, record.contractAddress, this.web3)
-        .methods.release(DAOAddress)
+      getContract(ComputingPowerMining, record.contractAddress, this.web3)
+        .methods.claim()
         .send({ from: this.address })
         .then(() => {
           this.loading = false;

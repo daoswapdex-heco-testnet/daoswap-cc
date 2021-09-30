@@ -6,7 +6,7 @@ const supportedChains = [
     network: "heco-mainnet",
     chain_id: 128,
     network_id: 128,
-    rpc_url: "https://http-mainnet-node.huobichain.com",
+    rpc_url: "https://http-mainnet.hecochain.com",
     native_currency: {
       symbol: "HT",
       name: "Huobi ECO Chain",
