@@ -71,7 +71,7 @@
                         </td>
                         <td>{{ item.powerInfo.power }}</td>
                         <td>{{ item.powerInfo.receiveAmount }}</td>
-                        <td>{{ item.annualizedRate }}</td>
+                        <td>{{ item.annualizedRate }} %</td>
                         <td>
                           <v-btn
                             v-if="
@@ -176,7 +176,7 @@ export default {
       nodeName: "None"
     },
     // 算力合约列表
-    powerContractAddressList: ["0x876991E5AAe1Ad7E95C0F7e238D664a993330b7B"],
+    powerContractAddressList: ["0x74E4A1F855DD917CCD222E24b45da68F38fb32f7"],
     // 算力数据列表
     powerDataList: [],
     // 提示框
@@ -298,6 +298,8 @@ export default {
             const powerInfo = await contract.methods
               .accountPowerInfoList(this.address)
               .call();
+            const annualizedRate =
+              (powerInfo.receiveAmount / powerInfo.unreleasedAmount) * 100;
             const tempData = {
               contractAddress: item,
               totalReleaseAmount: weiToEther(totalReleaseAmount, this.web3),
@@ -310,7 +312,7 @@ export default {
                 receiveAmount: weiToEther(powerInfo.receiveAmount, this.web3),
                 isClaim: powerInfo.isClaim
               },
-              annualizedRate: powerInfo.power / powerInfo.receiveAmount
+              annualizedRate: parseFloat(annualizedRate).toFixed(2)
             };
             this.powerDataList.push(tempData);
           }
