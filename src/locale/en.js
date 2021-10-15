@@ -184,8 +184,11 @@ export default {
   Operation: "Operation",
 
   "Computing power mining": "Computing power mining",
-  "Power Column Duration": "Duration",
-  "Power Column Power": "Power",
-  "Power Column ClaimableAmount": "Claimable Amount",
-  "Power Column AnnualizedRate": "Annualized Rate"
+  "Power Duration": "Power Duration",
+  "Power Column Power": "Power Column Power",
+  "Claimable Amount": "Claimable Amount",
+  "Power Column AnnualizedRate": "Power Column AnnualizedRate",
+  "Whole network/node computing power": "Whole network/node computing power",
+  "Status/Number of LPs": "Status/Number of LPs",
+  "No Data": "No Data"
 };

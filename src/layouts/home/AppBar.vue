@@ -51,15 +51,6 @@
             >{{ $t("Airdrop") }}</v-tab
           >
           <v-tab
-            to="/airdrop-holder"
-            :ripple="false"
-            class="font-weight-bold"
-            min-width="96"
-            text
-            v-if="isInWhiteList"
-            >{{ $t("AirdropHolder") }}</v-tab
-          >
-          <v-tab
             to="/chn"
             :ripple="false"
             class="font-weight-bold"
@@ -118,9 +109,6 @@
           </v-list-item>
           <v-list-item to="/airdrop">
             <v-list-item-title>{{ $t("Airdrop") }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item to="/airdrop-holder" v-if="isInWhiteList">
-            <v-list-item-title>{{ $t("AirdropHolder") }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/chn">
             <v-list-item-title>{{ $t("CHN") }}</v-list-item-title>

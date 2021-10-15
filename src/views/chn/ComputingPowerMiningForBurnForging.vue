@@ -318,7 +318,7 @@ export default {
           }
         });
         await Promise.all(getResult);
-        this.loading = true;
+        this.loading = false;
       }
     },
     // 提取DAO

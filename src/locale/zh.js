@@ -178,8 +178,11 @@ export default {
   Operation: "操作",
 
   "Computing power mining": "算力挖矿",
-  "Power Column Duration": "周期",
+  "Power Duration": "周期",
   "Power Column Power": "算力",
-  "Power Column ClaimableAmount": "可提取",
-  "Power Column AnnualizedRate": "年化率"
+  "Claimable Amount": "可提取",
+  "Power Column AnnualizedRate": "年化率",
+  "Whole network/node computing power": "全网/节点算力",
+  "Status/Number of LPs": "状态/LP数量",
+  "No Data": "暂无数据"
 };

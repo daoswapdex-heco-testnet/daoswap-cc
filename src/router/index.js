@@ -1,14 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import CrowdsaleForRetail from "../views/CrowdsaleForRetail.vue";
-import CrowdsaleForRetail2 from "../views/CrowdsaleForRetail2.vue";
-import CrowdsaleForRetailEnd from "../views/CrowdsaleForRetailEnd.vue";
-import AirdropToRelationship from "../views/AirdropToRelationship.vue";
-import AirdropForStake from "../views/AirdropForStake.vue";
-import AirdropForHoldDAO from "../views/AirdropForHoldDAO.vue";
-import BurnForging from "../views/chn/BurnForging.vue";
-import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
-import ComputingPowerMining from "../views/chn/ComputingPowerMining.vue";
+import CrowdsaleForRetail from "../views/crowdsale/CrowdsaleForRetail.vue";
+import CrowdsaleForRetail2 from "../views/crowdsale/CrowdsaleForRetail2.vue";
+import CrowdsaleForRetailEnd from "../views/crowdsale/CrowdsaleForRetailEnd.vue";
+import AirdropToRelationship from "../views/airdrop/AirdropToRelationship.vue";
+import AirdropForSwapsSnapshot from "../views/airdrop/AirdropForSwapsSnapshot.vue";
+// import BurnForging from "../views/chn/BurnForging.vue";
+// import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
+import ComputingPowerMiningForLiquidity from "../views/chn/ComputingPowerMiningForLiquidity.vue";
 
 Vue.use(VueRouter);
 
@@ -26,7 +25,7 @@ const routes = [
         path: "/stake",
         name: "Stake",
         redirect: "/stake/period-2",
-        component: () => import("@/layouts/home/View.vue"),
+        component: () => import("@/layouts/home/ViewBlank.vue"),
         children: [
           {
             path: "/stake/end",
@@ -48,33 +47,28 @@ const routes = [
       {
         path: "/airdrop",
         name: "Airdrop",
-        component: AirdropForStake
-      },
-      {
-        path: "/airdrop-holder",
-        name: "AirdropHolder",
-        component: AirdropForHoldDAO
+        component: AirdropForSwapsSnapshot
       },
       {
         path: "/chn",
         name: "CHN",
-        redirect: "/chn/node",
-        component: () => import("@/layouts/home/View.vue"),
+        redirect: "/chn/power/mining",
+        component: () => import("@/layouts/home/ViewBlank.vue"),
         children: [
-          {
-            path: "/chn/node",
-            name: "CHNNode",
-            component: BurnForging
-          },
-          {
-            path: "/chn/forging/history",
-            name: "BurnForgingHistory",
-            component: BurnForgingHistory
-          },
+          // {
+          //   path: "/chn/node",
+          //   name: "CHNNode",
+          //   component: BurnForging
+          // },
+          // {
+          //   path: "/chn/forging/history",
+          //   name: "BurnForgingHistory",
+          //   component: BurnForgingHistory
+          // },
           {
             path: "/chn/power/mining",
-            name: "ComputingPowerMining",
-            component: ComputingPowerMining
+            name: "ComputingPowerMiningForLiquidity",
+            component: ComputingPowerMiningForLiquidity
           }
         ]
       },

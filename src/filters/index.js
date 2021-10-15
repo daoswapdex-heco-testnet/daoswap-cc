@@ -91,3 +91,16 @@ export function judgeCHNNodeType(value) {
     return "None";
   }
 }
+
+/**
+ * 根据值判断节点类型
+ */
+export function judgeCHNNodeTypeByValue(value) {
+  if (value == 2) {
+    return "Planetary node";
+  } else if (value == 1) {
+    return "Stellar node";
+  } else {
+    return "None";
+  }
+}
