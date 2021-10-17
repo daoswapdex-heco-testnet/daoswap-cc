@@ -184,5 +184,7 @@ export default {
   "Power Column AnnualizedRate": "年化率",
   "Whole network/node computing power": "全网/节点算力",
   "Status/Number of LPs": "状态/LP数量",
-  "No Data": "暂无数据"
+  "No Data": "暂无数据",
+  "Power Phase": "第",
+  "Power Expect": "期"
 };

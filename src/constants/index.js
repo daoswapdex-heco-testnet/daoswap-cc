@@ -23,7 +23,7 @@ export const AirdropForHoldDAOContractAddress =
   "0x407849b0f6E37f1c728b91FDd4bb13f6945874f0";
 
 export const AirdropForSwapsSnapshotContractAddress =
-  "0x2bbdeee6f289521F19058bd7191389E24EA21a81";
+  "0xD391a1E0E907c22E8A6f548DF9B3293316731A5E";
 
 export const BecomeCGNContractAddress =
   "0x663c0d4B16Dad6A633238A3321b98AF5794f00C6";

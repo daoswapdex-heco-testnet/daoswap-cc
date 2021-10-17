@@ -260,43 +260,59 @@ export default {
         this.$v.$touch();
       } else {
         this.$v.$touch();
-        const contract = getContract(
+        // const contract = getContract(
+        //   AirdropToRelationship,
+        //   AirdropToRelationshipContractAddress,
+        //   this.web3
+        // );
+        this.loading = true;
+        // 执行合约
+        getContract(
           AirdropToRelationship,
           AirdropToRelationshipContractAddress,
           this.web3
-        );
-        this.loading = true;
-        // check account checkDatBalance
-        const checkDatBalance = await contract.methods
-          .checkDatBalance(toChecksumAddress(this.inviterAccount))
-          .call();
-        // check account checkDatStake
-        const checkDatStake = await contract.methods
-          .checkDatStake(toChecksumAddress(this.inviterAccount))
-          .call();
-        if (checkDatBalance || checkDatStake) {
-          // 执行合约
-          getContract(
-            AirdropToRelationship,
-            AirdropToRelationshipContractAddress,
-            this.web3
-          )
-            .methods.receiveAirdrop(toChecksumAddress(this.inviterAccount))
-            .send({ from: this.address })
-            .then(() => {
-              this.loading = false;
-              this.getAccountAssets();
-            })
-            .catch(e => {
-              this.loading = false;
-              console.info(e);
-            });
-        } else {
-          this.operationResult.color = "error";
-          this.operationResult.snackbar = true;
-          this.operationResult.text = "The mentor's address is wrong";
-          this.loading = false;
-        }
+        )
+          .methods.receiveAirdrop(toChecksumAddress(this.inviterAccount))
+          .send({ from: this.address })
+          .then(() => {
+            this.loading = false;
+            this.getAccountAssets();
+          })
+          .catch(e => {
+            this.loading = false;
+            console.info(e);
+          });
+        // // check account checkDatBalance
+        // const checkDatBalance = await contract.methods
+        //   .checkDatBalance(toChecksumAddress(this.inviterAccount))
+        //   .call();
+        // // check account checkDatStake
+        // const checkDatStake = await contract.methods
+        //   .checkDatStake(toChecksumAddress(this.inviterAccount))
+        //   .call();
+        // if (checkDatBalance || checkDatStake) {
+        //   // 执行合约
+        //   getContract(
+        //     AirdropToRelationship,
+        //     AirdropToRelationshipContractAddress,
+        //     this.web3
+        //   )
+        //     .methods.receiveAirdrop(toChecksumAddress(this.inviterAccount))
+        //     .send({ from: this.address })
+        //     .then(() => {
+        //       this.loading = false;
+        //       this.getAccountAssets();
+        //     })
+        //     .catch(e => {
+        //       this.loading = false;
+        //       console.info(e);
+        //     });
+        // } else {
+        //   this.operationResult.color = "error";
+        //   this.operationResult.snackbar = true;
+        //   this.operationResult.text = "The mentor's address is wrong";
+        //   this.loading = false;
+        // }
       }
     }
   }

@@ -24,7 +24,8 @@
                   class="ma-2"
                 >
                   <v-card-title
-                    >第{{ powerDataList.length - index }}期</v-card-title
+                    >{{ $t("Power Phase") }}{{ powerDataList.length - index
+                    }}{{ $t("Power Expect") }}</v-card-title
                   >
                   <v-divider class="mx-4"></v-divider>
                   <v-card-text>
@@ -61,6 +62,7 @@
                       dark
                       width="80%"
                       @click="handleRelease(item)"
+                      :disabled="item.powerInfo.isClaim"
                     >
                       {{ $t("Claim") }}
                     </v-btn>
@@ -216,6 +218,7 @@ export default {
     // 获取算力数据列表
     async getPowerDataList() {
       if (this.powerContractAddressList.length > 0) {
+        this.powerDataList = [];
         this.loading = true;
         const getResult = this.powerContractAddressList.map(async item => {
           const contract = await getContract(

@@ -190,5 +190,7 @@ export default {
   "Power Column AnnualizedRate": "Power Column AnnualizedRate",
   "Whole network/node computing power": "Whole network/node computing power",
   "Status/Number of LPs": "Status/Number of LPs",
-  "No Data": "No Data"
+  "No Data": "No Data",
+  "Power Phase": "Phase",
+  "Power Expect": ""
 };
