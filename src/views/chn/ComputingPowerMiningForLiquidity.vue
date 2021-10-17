@@ -269,7 +269,7 @@ export default {
           this.loading = false;
           this.operationResult.snackbar = true;
           this.operationResult.text = "Claim Success";
-          this.getPowerDataList();
+          window.location.reload();
         })
         .catch(e => {
           this.loading = false;
