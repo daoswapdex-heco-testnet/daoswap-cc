@@ -23,11 +23,12 @@ export const AirdropForHoldDAOContractAddress =
   "0x407849b0f6E37f1c728b91FDd4bb13f6945874f0";
 
 export const AirdropForSwapsSnapshotContractAddress =
-  "0xD391a1E0E907c22E8A6f548DF9B3293316731A5E";
+  "0xF05F51257c4908CAA5a6E7b40cadDF60cEe6A1D5";
 
 export const BecomeCGNContractAddress =
   "0x663c0d4B16Dad6A633238A3321b98AF5794f00C6";
 
+/********** base **********/
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 
 export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";
