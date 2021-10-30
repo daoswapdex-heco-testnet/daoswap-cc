@@ -12,6 +12,7 @@ export default {
   PE: "私募",
   Whitepaper: "白皮书",
   News: "新闻",
+  Creation: "创世",
 
   Close: "关闭",
 
@@ -181,6 +182,7 @@ export default {
   "Power Duration": "周期",
   "Power Column Power": "算力",
   "Claimable Amount": "可提取",
+  "Claimabled Amount": "已提取",
   "Power Column AnnualizedRate": "年化率",
   "Whole network/node computing power": "全网/节点算力",
   "Status/Number of LPs": "状态/LP数量",

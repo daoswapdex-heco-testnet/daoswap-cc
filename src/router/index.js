@@ -8,6 +8,7 @@ import AirdropForSwapsSnapshot from "../views/airdrop/AirdropForSwapsSnapshot.vu
 // import BurnForging from "../views/chn/BurnForging.vue";
 // import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
 import ComputingPowerMiningForLiquidity from "../views/chn/ComputingPowerMiningForLiquidity.vue";
+import ComputingPowerMiningForLiquidityCreation from "../views/chn/ComputingPowerMiningForLiquidityCreation.vue";
 
 Vue.use(VueRouter);
 
@@ -71,6 +72,11 @@ const routes = [
             component: ComputingPowerMiningForLiquidity
           }
         ]
+      },
+      {
+        path: "/creation",
+        name: "Creation",
+        component: ComputingPowerMiningForLiquidityCreation
       },
       {
         path: "/invite",

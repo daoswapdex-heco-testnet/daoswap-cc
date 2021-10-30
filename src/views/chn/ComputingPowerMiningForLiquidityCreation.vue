@@ -51,19 +51,9 @@
                       {{ item.powerInfo.liquidity }}
                     </p>
                     <p>
-                      {{ $t("Claimable Amount") }} /
-                      {{ $t("Claimabled Amount") }}：{{
-                        item.powerInfo.isClaim
-                          ? 0
-                          : item.powerInfo.receiveAmount
+                      {{ $t("Claimable Amount") + tokenSymbol }}：{{
+                        item.powerInfo.receiveAmount
                       }}
-                      /
-                      {{
-                        item.powerInfo.isClaim
-                          ? item.powerInfo.receiveAmount
-                          : 0
-                      }}
-                      {{ tokenSymbol }}
                     </p>
                   </v-card-text>
                   <v-divider class="mx-4"></v-divider>
@@ -166,21 +156,17 @@ export default {
     tokenSymbol: "DAO",
     // 算力合约列表
     powerContractAddressList: [
-      // {
-      //   id: 3,
-      //   address: "0x8f7811Bf78882c072bDAcaF79D70fc67404ACa47"
-      // },
-      // {
-      //   id: 2,
-      //   address: "0x863cB2caf3024B299db17B0fDce377FC211ae3E3"
-      // },
-      // {
-      //   id: 1,
-      //   address: "0xc2C919cb9bd81928C159596492348B8E9D6811eA"
-      // }
+      {
+        id: 3,
+        address: "0x8f7811Bf78882c072bDAcaF79D70fc67404ACa47"
+      },
+      {
+        id: 2,
+        address: "0x863cB2caf3024B299db17B0fDce377FC211ae3E3"
+      },
       {
         id: 1,
-        address: "0x79F38503c1311588788e710339C036466f653716"
+        address: "0xc2C919cb9bd81928C159596492348B8E9D6811eA"
       }
     ],
     // 算力数据列表

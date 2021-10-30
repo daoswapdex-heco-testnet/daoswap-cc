@@ -59,6 +59,14 @@
             >{{ $t("CHN") }}</v-tab
           >
           <v-tab
+            to="/creation"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("Creation") }}</v-tab
+          >
+          <v-tab
             to="/invite"
             :ripple="false"
             class="font-weight-bold"
@@ -112,6 +120,9 @@
           </v-list-item>
           <v-list-item to="/chn">
             <v-list-item-title>{{ $t("CHN") }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/creation">
+            <v-list-item-title>{{ $t("Creation") }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/invite">
             <v-list-item-title>{{ $t("Invite") }}</v-list-item-title>

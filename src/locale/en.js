@@ -12,6 +12,7 @@ export default {
   PE: "PE",
   Whitepaper: "Whitepaper",
   News: "News",
+  Creation: "Creation",
 
   Close: "Close",
 
@@ -187,6 +188,7 @@ export default {
   "Power Duration": "Power Duration",
   "Power Column Power": "Power Column Power",
   "Claimable Amount": "Claimable Amount",
+  "Claimabled Amount": "Claimabled Amount",
   "Power Column AnnualizedRate": "Power Column AnnualizedRate",
   "Whole network/node computing power": "Whole network/node computing power",
   "Status/Number of LPs": "Status/Number of LPs",

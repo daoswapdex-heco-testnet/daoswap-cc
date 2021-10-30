@@ -10,7 +10,7 @@
                 <v-avatar size="24" class="mr-2">
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
-                <span class="title font-weight-light">
+                <span class="title font-weight-bold text-h5">
                   {{ $t("Airdrop") }}
                 </span>
               </v-card-title>
@@ -93,7 +93,7 @@
           <!-- 当前钱包账号 -->
           <v-card justify="center" class="fill-width mt-10">
             <v-card-title>
-              <span class="title font-weight-light">
+              <span class="title font-weight-bold text-h5">
                 {{ $t("Current Token Address") }}
               </span>
             </v-card-title>
