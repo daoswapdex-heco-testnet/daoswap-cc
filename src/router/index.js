@@ -50,32 +50,37 @@ const routes = [
         name: "Airdrop",
         component: AirdropForSwapsSnapshot
       },
+      // {
+      //   path: "/chn",
+      //   name: "CHN",
+      //   redirect: "/chn/power/mining",
+      //   component: () => import("@/layouts/home/ViewBlank.vue"),
+      //   children: [
+      //     // {
+      //     //   path: "/chn/node",
+      //     //   name: "CHNNode",
+      //     //   component: BurnForging
+      //     // },
+      //     // {
+      //     //   path: "/chn/forging/history",
+      //     //   name: "BurnForgingHistory",
+      //     //   component: BurnForgingHistory
+      //     // },
+      //     {
+      //       path: "/chn/power/mining",
+      //       name: "ComputingPowerMiningForLiquidity",
+      //       component: ComputingPowerMiningForLiquidity
+      //     }
+      //   ]
+      // },
       {
-        path: "/chn",
-        name: "CHN",
-        redirect: "/chn/power/mining",
-        component: () => import("@/layouts/home/ViewBlank.vue"),
-        children: [
-          // {
-          //   path: "/chn/node",
-          //   name: "CHNNode",
-          //   component: BurnForging
-          // },
-          // {
-          //   path: "/chn/forging/history",
-          //   name: "BurnForgingHistory",
-          //   component: BurnForgingHistory
-          // },
-          {
-            path: "/chn/power/mining",
-            name: "ComputingPowerMiningForLiquidity",
-            component: ComputingPowerMiningForLiquidity
-          }
-        ]
+        path: "/hash-mining",
+        name: "Hash Mining",
+        component: ComputingPowerMiningForLiquidity
       },
       {
-        path: "/creation",
-        name: "Creation",
+        path: "/competition-mining",
+        name: "Competition Mining",
         component: ComputingPowerMiningForLiquidityCreation
       },
       {

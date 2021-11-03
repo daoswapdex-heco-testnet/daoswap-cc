@@ -178,7 +178,8 @@ export default {
   "Released Amount": "已释放",
   Operation: "操作",
 
-  "Computing power mining": "算力挖矿",
+  "Hash Mining": "算力挖矿",
+  "Competition Mining": "竞争挖矿",
   "Power Duration": "周期",
   "Power Column Power": "算力",
   "Claimable Amount": "可提取",
@@ -186,6 +187,10 @@ export default {
   "Power Column AnnualizedRate": "年化率",
   "Whole network/node computing power": "全网/节点算力",
   "Status/Number of LPs": "状态/LP数量",
+  "Power All Hash": "全网算力",
+  "Power Node Proportion": "节点占比",
+  "Power Node Status": "节点状态",
+  "Power DAO-USDT Liquidity Value": "DAO-USDT流动性价值",
   "No Data": "暂无数据",
   "Power Phase": "第",
   "Power Expect": "期"

@@ -12,7 +12,7 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-bold text-h5">
-                  {{ $t("Computing power mining") }}
+                  {{ $t("Hash Mining") }}
                 </span>
               </v-card-title>
               <v-divider></v-divider>
@@ -37,18 +37,22 @@
                       ~
                       {{ item.endTime | parseTime("{y}-{m}-{d}") }}
                     </p>
+                    <p>{{ $t("Power All Hash") }}：{{ item.countedPower }}</p>
                     <p>
-                      {{ $t("Whole network/node computing power") }}：{{
-                        item.countedPower
+                      {{ $t("Power Node Proportion") }}：{{
+                        item.annualizedRate
                       }}
-                      / {{ item.annualizedRate }} %
+                      %
                     </p>
                     <p>
-                      {{ $t("Status/Number of LPs") }}：{{
-                        item.powerInfo.nodeType
+                      {{ $t("Power Node Status") }}：{{
+                        $t(`Node.${item.powerInfo.nodeType}`)
                       }}
-                      /
-                      {{ item.powerInfo.liquidity }}
+                    </p>
+                    <p>
+                      {{ $t("Power DAO-USDT Liquidity Value") }}：{{
+                        item.powerInfo.liquidity
+                      }}
                     </p>
                     <p>
                       {{ $t("Claimable Amount") }} /
@@ -180,7 +184,7 @@ export default {
       // }
       {
         id: 1,
-        address: "0x79F38503c1311588788e710339C036466f653716"
+        address: "0x24Dbc1Cc8F1f48c1752AfAd103F51a4132032156"
       }
     ],
     // 算力数据列表

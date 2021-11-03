@@ -144,7 +144,7 @@
                   color="#93B954"
                   @click="gotoPower"
                 >
-                  {{ $t("Computing power mining") }}
+                  {{ $t("Hash Mining") }}
                 </v-btn>
               </v-card-actions>
             </v-card-text>

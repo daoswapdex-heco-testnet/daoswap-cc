@@ -36,7 +36,7 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-bold text-h5">
-                  {{ $t("Computing power mining") }}
+                  {{ $t("Hash Mining") }}
                 </span>
               </v-card-title>
               <v-divider></v-divider>

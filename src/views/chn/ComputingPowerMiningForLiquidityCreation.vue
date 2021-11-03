@@ -12,7 +12,7 @@
                   <img :src="require('@/assets/logo.png')" alt="DAO" />
                 </v-avatar>
                 <span class="title font-weight-bold text-h5">
-                  {{ $t("Computing power mining") }}
+                  {{ $t("Competition Mining") }}
                 </span>
               </v-card-title>
               <v-divider></v-divider>
@@ -37,23 +37,37 @@
                       ~
                       {{ item.endTime | parseTime("{y}-{m}-{d}") }}
                     </p>
+                    <p>{{ $t("Power All Hash") }}：{{ item.countedPower }}</p>
                     <p>
-                      {{ $t("Whole network/node computing power") }}：{{
-                        item.countedPower
+                      {{ $t("Power Node Proportion") }}：{{
+                        item.annualizedRate
                       }}
-                      / {{ item.annualizedRate }} %
+                      %
                     </p>
                     <p>
-                      {{ $t("Status/Number of LPs") }}：{{
-                        item.powerInfo.nodeType
+                      {{ $t("Power Node Status") }}：{{
+                        $t(`Node.${item.powerInfo.nodeType}`)
+                      }}
+                    </p>
+                    <p>
+                      {{ $t("Power DAO-USDT Liquidity Value") }}：{{
+                        item.powerInfo.liquidity
+                      }}
+                    </p>
+                    <p>
+                      {{ $t("Claimable Amount") }} /
+                      {{ $t("Claimabled Amount") }}：{{
+                        item.powerInfo.isClaim
+                          ? 0
+                          : item.powerInfo.receiveAmount
                       }}
                       /
-                      {{ item.powerInfo.liquidity }}
-                    </p>
-                    <p>
-                      {{ $t("Claimable Amount") + tokenSymbol }}：{{
-                        item.powerInfo.receiveAmount
+                      {{
+                        item.powerInfo.isClaim
+                          ? item.powerInfo.receiveAmount
+                          : 0
                       }}
+                      {{ tokenSymbol }}
                     </p>
                   </v-card-text>
                   <v-divider class="mx-4"></v-divider>
@@ -147,26 +161,18 @@ import clip from "@/utils/clipboard";
 import { getContract, weiToEther } from "@/utils/web3";
 import { judgeCHNNodeTypeByValue } from "@/filters/index";
 // 引入合约 ABI 文件
-import ComputingPowerMining from "@/constants/contractJson/ComputingPowerMiningForLiquidity.json";
+import ComputingPowerMining from "@/constants/contractJson/ComputingPowerMiningForLiquidityCreation.json";
 
 export default {
-  name: "ComputingPowerMiningForLiquidity",
+  name: "ComputingPowerMiningForLiquidityCreation",
   data: () => ({
     loading: false,
     tokenSymbol: "DAO",
     // 算力合约列表
     powerContractAddressList: [
       {
-        id: 3,
-        address: "0x8f7811Bf78882c072bDAcaF79D70fc67404ACa47"
-      },
-      {
-        id: 2,
-        address: "0x863cB2caf3024B299db17B0fDce377FC211ae3E3"
-      },
-      {
         id: 1,
-        address: "0xc2C919cb9bd81928C159596492348B8E9D6811eA"
+        address: "0x3a55D934d6B1F15642fA7F076b174AEF78eBa8A0"
       }
     ],
     // 算力数据列表
@@ -205,7 +211,6 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
-      // return "0x3DdcFc89B4DD2b33d9a8Ca0F60180527E9810D4B";
       return this.$store.state.web3.address;
     }
   },
