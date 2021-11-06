@@ -3,8 +3,34 @@
     <v-container v-if="web3 && connected" class="fill-height">
       <v-row justify="center">
         <v-col md="6">
+          <!-- 公告 -->
+          <v-card justify="center" class="fill-width">
+            <v-card-title>
+              <span class="title font-weight-bold text-h5">
+                {{ $t("Activities") }}
+              </span>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
+              <v-row align="center">
+                <v-col class="body-1" cols="12">
+                  <p>
+                    {{ $t("Power Duration") }}：2021-10-21 11:00:00 ~ 2021-11-04
+                    11:00:00
+                  </p>
+                  <p>
+                    {{
+                      $t(
+                        "Will caculate and airdrop within 3 workdays after the last day."
+                      )
+                    }}
+                  </p>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
           <!-- 操作 -->
-          <v-card class="fill-width">
+          <v-card class="fill-width mt-10">
             <v-card outlined>
               <!-- 标题 -->
               <v-card-title>
@@ -43,6 +69,10 @@
                         item.annualizedRate
                       }}
                       %
+                    </p>
+                    <p>
+                      {{ $t("Power Node Hash Value") }}：$
+                      {{ item.countedPowerValue }}
                     </p>
                     <p>
                       {{ $t("Power Node Status") }}：{{
@@ -167,12 +197,16 @@ export default {
   name: "ComputingPowerMiningForLiquidityCreation",
   data: () => ({
     loading: false,
-    tokenSymbol: "DAO",
+    tokenSymbol: "DTC1",
     // 算力合约列表
     powerContractAddressList: [
+      // {
+      //   id: 1,
+      //   address: "0x3a55D934d6B1F15642fA7F076b174AEF78eBa8A0"
+      // }
       {
         id: 1,
-        address: "0x3a55D934d6B1F15642fA7F076b174AEF78eBa8A0"
+        address: "0x77B9f02eE252B6EFfd522B3918201A04376e36f6"
       }
     ],
     // 算力数据列表
@@ -211,6 +245,7 @@ export default {
       return this.$store.state.web3.web3;
     },
     address() {
+      // return "0x3DdcFc89B4DD2b33d9a8Ca0F60180527E9810D4B";
       return this.$store.state.web3.address;
     }
   },
@@ -246,6 +281,9 @@ export default {
             .call();
           if (hasPowerInfo) {
             const countedPower = await contract.methods.countedPower().call();
+            const countedPowerValue = await contract.methods
+              .countedPowerValue()
+              .call();
             const startTime = await contract.methods.startTime().call();
             const endTime = await contract.methods.endTime().call();
             const powerInfo = await contract.methods
@@ -256,10 +294,12 @@ export default {
               periodId: item.id,
               contractAddress: item.address,
               countedPower: weiToEther(countedPower, this.web3),
+              countedPowerValue: weiToEther(countedPowerValue, this.web3),
               startTime: startTime,
               endTime: endTime,
               powerInfo: {
                 power: weiToEther(powerInfo.power, this.web3),
+                powerValue: weiToEther(powerInfo.powerValue, this.web3),
                 receiveAmount: weiToEther(powerInfo.receiveAmount, this.web3),
                 nodeType: judgeCHNNodeTypeByValue(powerInfo.nodeType),
                 liquidity: weiToEther(powerInfo.liquidity, this.web3),

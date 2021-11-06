@@ -195,9 +195,14 @@ export default {
   "Status/Number of LPs": "Status/Number of LPs",
   "Power All Hash": "All Hash",
   "Power Node Proportion": "Node Proportion",
+  "Power Node Hash Value": "Node Hash Value",
   "Power Node Status": "Node Status",
   "Power DAO-USDT Liquidity Value": "DAO-USDT Liquidity Value",
   "No Data": "No Data",
   "Power Phase": "Phase",
-  "Power Expect": ""
+  "Power Expect": "",
+
+  Activities: "Activities",
+  "Will caculate and airdrop within 3 workdays after the last day.":
+    "Will caculate and airdrop within 3 workdays after the last day."
 };

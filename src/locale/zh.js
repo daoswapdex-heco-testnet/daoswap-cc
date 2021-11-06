@@ -189,9 +189,14 @@ export default {
   "Status/Number of LPs": "状态/LP数量",
   "Power All Hash": "全网算力",
   "Power Node Proportion": "节点占比",
+  "Power Node Hash Value": "节点算力价值",
   "Power Node Status": "节点状态",
   "Power DAO-USDT Liquidity Value": "DAO-USDT流动性价值",
   "No Data": "暂无数据",
   "Power Phase": "第",
-  "Power Expect": "期"
+  "Power Expect": "期",
+
+  Activities: "进行中的活动",
+  "Will caculate and airdrop within 3 workdays after the last day.":
+    "周期结束后，3个工作日内完成统计并空投。"
 };
