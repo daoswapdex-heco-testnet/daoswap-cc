@@ -200,13 +200,9 @@ export default {
     tokenSymbol: "DTC1",
     // 算力合约列表
     powerContractAddressList: [
-      // {
-      //   id: 1,
-      //   address: "0x3a55D934d6B1F15642fA7F076b174AEF78eBa8A0"
-      // }
       {
         id: 1,
-        address: "0x77B9f02eE252B6EFfd522B3918201A04376e36f6"
+        address: "0xfc402DaB7C7Efc36232E7FA1A7482d69452C2DA4"
       }
     ],
     // 算力数据列表

@@ -199,29 +199,9 @@ export default {
     tokenSymbol: "DAO",
     // 算力合约列表
     powerContractAddressList: [
-      // {
-      //   id: 3,
-      //   address: "0x8f7811Bf78882c072bDAcaF79D70fc67404ACa47"
-      // },
-      // {
-      //   id: 2,
-      //   address: "0x863cB2caf3024B299db17B0fDce377FC211ae3E3"
-      // },
-      // {
-      //   id: 1,
-      //   address: "0xc2C919cb9bd81928C159596492348B8E9D6811eA"
-      // }
-      // {
-      //   id: 1,
-      //   address: "0x24Dbc1Cc8F1f48c1752AfAd103F51a4132032156"
-      // }
-      // {
-      //   id: 1,
-      //   address: "0x60c903DE01a18B0AFaDCFa28326d8A30a66b8b96"
-      // }
       {
         id: 1,
-        address: "0x758b6bb90E781e78c65d978fa01fec9F77C85b4A"
+        address: "0x20c3A8087cc8Ee3d25364e7010f20b84c0104ae1"
       }
     ],
     // 算力数据列表
