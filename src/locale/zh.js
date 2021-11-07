@@ -149,7 +149,7 @@ export default {
   "Forging event has ended": "锻造活动已结束",
   Node: {
     None: "无",
-    "Planetary node": "行星节点",
+    "Planet node": "行星节点",
     "Stellar node": "恒星节点"
   },
   "Choose a forging pool": "选择锻造矿池",

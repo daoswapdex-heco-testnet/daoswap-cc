@@ -153,7 +153,7 @@ export default {
   "Forging event has ended": "Forging event has ended",
   Node: {
     None: "None",
-    "Planetary node": "Planetary node",
+    "Planet node": "Planet node",
     "Stellar node": "Stellar node"
   },
   "Choose a forging pool": "Choose a forging pool",

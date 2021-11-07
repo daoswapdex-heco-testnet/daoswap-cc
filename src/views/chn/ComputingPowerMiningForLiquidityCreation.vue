@@ -189,7 +189,7 @@
 <script>
 import clip from "@/utils/clipboard";
 import { getContract, weiToEther } from "@/utils/web3";
-import { judgeCHNNodeTypeByValue } from "@/filters/index";
+import { judgeCHNNodeTypeByValue, compare } from "@/filters/index";
 // 引入合约 ABI 文件
 import ComputingPowerMining from "@/constants/contractJson/ComputingPowerMiningForLiquidityCreation.json";
 
@@ -203,6 +203,10 @@ export default {
       {
         id: 1,
         address: "0xfc402DaB7C7Efc36232E7FA1A7482d69452C2DA4"
+      },
+      {
+        id: 2,
+        address: "0xfe2692574cC1f8397251F85677E7A73006bCc454"
       }
     ],
     // 算力数据列表
@@ -307,6 +311,7 @@ export default {
           }
         });
         await Promise.all(getResult);
+        this.powerDataList.sort(compare("periodId"));
         this.loading = false;
       }
     },
@@ -321,7 +326,8 @@ export default {
           this.loading = false;
           this.operationResult.snackbar = true;
           this.operationResult.text = "Claim Success";
-          window.location.reload();
+          // 重新获取数据
+          this.getPowerDataList();
         })
         .catch(e => {
           this.loading = false;

@@ -262,7 +262,7 @@ export default {
           this.accountAssets.releasableAmount >= 10 &&
           this.accountAssets.releasableAmount < 20
         ) {
-          this.accountAssets.nodeName = "Planetary node";
+          this.accountAssets.nodeName = "Planet node";
         } else if (this.accountAssets.releasableAmount >= 20) {
           this.accountAssets.nodeName = "Stellar node";
         }
