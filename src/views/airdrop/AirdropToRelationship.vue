@@ -38,8 +38,9 @@
                       v-model="inviterAccount"
                       :error-messages="inviterAccountErrors"
                       required
-                      @input="$v.inviterAccount.$touch()"
-                      @blur="$v.inviterAccount.$touch()"
+                      @input="setAccountAddress($event.target.value)"
+                      @blur="setAccountAddress($event.target.value)"
+                      @keyup="setAccountAddress($event.target.value)"
                       :autofocus="inviterAccountFocus"
                     ></v-text-field>
                   </v-card-text>
@@ -226,6 +227,14 @@ export default {
       this.operationResult.color = "success";
       this.operationResult.snackbar = true;
       this.operationResult.text = "Cope Success";
+    },
+    // 处理输入地址格式
+    setAccountAddress(value) {
+      try {
+        this.inviterAccount = toChecksumAddress(value);
+      } catch (error) {
+        this.$v.inviterAccount.$touch();
+      }
     },
     // 获取账号信息
     async getAccountAssets() {
