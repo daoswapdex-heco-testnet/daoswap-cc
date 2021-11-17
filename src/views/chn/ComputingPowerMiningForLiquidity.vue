@@ -201,12 +201,12 @@ export default {
     powerContractAddressList: [
       {
         id: 1,
-        address: "0x20c3A8087cc8Ee3d25364e7010f20b84c0104ae1"
-      },
-      {
-        id: 2,
-        address: "0x3Bcc30467B7e256c43E2be6Ff28dEa0cb59BA667"
+        address: "0xc95F44f25756762CA064c5b065455c12dE2DE4A0"
       }
+      // {
+      //   id: 2,
+      //   address: "0x3Bcc30467B7e256c43E2be6Ff28dEa0cb59BA667"
+      // }
     ],
     // 算力数据列表
     powerDataList: [],
