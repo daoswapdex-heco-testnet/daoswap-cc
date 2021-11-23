@@ -43,6 +43,14 @@
             >{{ $t("Stake") }}</v-tab
           >
           <v-tab
+            to="/stake-dst"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("Stake DST") }}</v-tab
+          >
+          <v-tab
             to="/airdrop"
             :ripple="false"
             class="font-weight-bold"
@@ -66,6 +74,14 @@
             text
             >{{ $t("Competition Mining") }}</v-tab
           >
+          <!-- <v-tab
+            to="/chn"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("CHN") }}</v-tab
+          > -->
           <v-tab
             to="/invite"
             :ripple="false"
@@ -115,6 +131,9 @@
           <v-list-item to="/stake">
             <v-list-item-title>{{ $t("Stake") }}</v-list-item-title>
           </v-list-item>
+          <v-list-item to="/stake-dst">
+            <v-list-item-title>{{ $t("Stake DST") }}</v-list-item-title>
+          </v-list-item>
           <v-list-item to="/airdrop">
             <v-list-item-title>{{ $t("Airdrop") }}</v-list-item-title>
           </v-list-item>
@@ -126,6 +145,9 @@
               $t("Competition Mining")
             }}</v-list-item-title>
           </v-list-item>
+          <!-- <v-list-item to="/chn">
+            <v-list-item-title>{{ $t("CHN") }}</v-list-item-title>
+          </v-list-item> -->
           <v-list-item to="/invite">
             <v-list-item-title>{{ $t("Invite") }}</v-list-item-title>
           </v-list-item>

@@ -204,5 +204,14 @@ export default {
 
   Activities: "Activities",
   "Will caculate and airdrop within 3 workdays after the last day.":
-    "Will caculate and airdrop within 3 workdays after the last day."
+    "Will caculate and airdrop within 3 workdays after the last day.",
+
+  "Stake DST": "Stake DST",
+  "DST Stake": "DST Stake",
+  "DST Staked Total Amount": "DST Stake Total Amount",
+  "DST Stakeable Amount": "DST Stakeable Amount",
+  "DST Staked History": "DST Staked History",
+  "DST Staked Success": "DST Staked Success",
+  "DST Stake Duration": "Staked Duration",
+  "DST Staked Amount": "DST Staked Amount"
 };

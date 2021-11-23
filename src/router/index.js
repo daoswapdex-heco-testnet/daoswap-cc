@@ -5,10 +5,12 @@ import CrowdsaleForRetail2 from "../views/crowdsale/CrowdsaleForRetail2.vue";
 import CrowdsaleForRetailEnd from "../views/crowdsale/CrowdsaleForRetailEnd.vue";
 import AirdropToRelationship from "../views/airdrop/AirdropToRelationship.vue";
 import AirdropForSwapsSnapshot from "../views/airdrop/AirdropForSwapsSnapshot.vue";
-// import BurnForging from "../views/chn/BurnForging.vue";
-// import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
+import BurnForging from "../views/chn/BurnForging.vue";
+import BurnForgingHistory from "../views/chn/BurnForgingHistory.vue";
 import ComputingPowerMiningForLiquidity from "../views/chn/ComputingPowerMiningForLiquidity.vue";
 import ComputingPowerMiningForLiquidityCreation from "../views/chn/ComputingPowerMiningForLiquidityCreation.vue";
+import CrowdsaleForRetailUnlimited from "../views/crowdsale/crowdsaleForRetailUnlimited/CrowdsaleForRetailUnlimited.vue";
+import CrowdsaleForRetailUnlimitedHistory from "../views/crowdsale/crowdsaleForRetailUnlimited/CrowdsaleForRetailUnlimitedHistory.vue";
 
 Vue.use(VueRouter);
 
@@ -46,33 +48,46 @@ const routes = [
         ]
       },
       {
+        path: "/stake-dst",
+        name: "StakeDST",
+        redirect: "/stake-dst/stake",
+        component: () => import("@/layouts/home/ViewBlank.vue"),
+        children: [
+          {
+            path: "/stake-dst/stake",
+            name: "CrowdsaleForRetailUnlimited",
+            component: CrowdsaleForRetailUnlimited
+          },
+          {
+            path: "/stake-dst/history",
+            name: "CrowdsaleForRetailUnlimitedHistory",
+            component: CrowdsaleForRetailUnlimitedHistory
+          }
+        ]
+      },
+      {
         path: "/airdrop",
         name: "Airdrop",
         component: AirdropForSwapsSnapshot
       },
-      // {
-      //   path: "/chn",
-      //   name: "CHN",
-      //   redirect: "/chn/power/mining",
-      //   component: () => import("@/layouts/home/ViewBlank.vue"),
-      //   children: [
-      //     // {
-      //     //   path: "/chn/node",
-      //     //   name: "CHNNode",
-      //     //   component: BurnForging
-      //     // },
-      //     // {
-      //     //   path: "/chn/forging/history",
-      //     //   name: "BurnForgingHistory",
-      //     //   component: BurnForgingHistory
-      //     // },
-      //     {
-      //       path: "/chn/power/mining",
-      //       name: "ComputingPowerMiningForLiquidity",
-      //       component: ComputingPowerMiningForLiquidity
-      //     }
-      //   ]
-      // },
+      {
+        path: "/chn",
+        name: "CHN",
+        redirect: "/chn/node",
+        component: () => import("@/layouts/home/ViewBlank.vue"),
+        children: [
+          {
+            path: "/chn/node",
+            name: "CHNNode",
+            component: BurnForging
+          },
+          {
+            path: "/chn/forging/history",
+            name: "BurnForgingHistory",
+            component: BurnForgingHistory
+          }
+        ]
+      },
       {
         path: "/hash-mining",
         name: "Hash Mining",

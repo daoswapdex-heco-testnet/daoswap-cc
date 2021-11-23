@@ -198,5 +198,14 @@ export default {
 
   Activities: "进行中的活动",
   "Will caculate and airdrop within 3 workdays after the last day.":
-    "周期结束后，3个工作日内完成统计并空投。"
+    "周期结束后，3个工作日内完成统计并空投。",
+
+  "Stake DST": "DST质押",
+  "DST Stake": "DST质押",
+  "DST Staked Total Amount": "已质押DST",
+  "DST Stakeable Amount": "可质押DST",
+  "DST Staked History": "质押记录",
+  "DST Staked Success": "DST质押成功",
+  "DST Stake Duration": "质押周期",
+  "DST Staked Amount": "DST质押数量"
 };

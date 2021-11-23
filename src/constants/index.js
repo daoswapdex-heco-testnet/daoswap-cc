@@ -28,10 +28,15 @@ export const AirdropForSwapsSnapshotContractAddress =
 export const BecomeCGNContractAddress =
   "0x663c0d4B16Dad6A633238A3321b98AF5794f00C6";
 
+export const CrowdsaleForRetailUnlimitedContractAddress =
+  "0x23AbBCc5E166e8e741B1DDb0c73d37b7776F4075";
+
 /********** base **********/
+export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";
+
 export const DATAddress = "0x36653A4089DEB09A4782bf9EaEE5C8f4381ad010";
 
-export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";
+export const DSTAddress = "0xd1c3d3cB6CE2D43aaBe8d1A78Dd5ADa60e5166c9";
 
 export const ZeroAddress = "0x0000000000000000000000000000000000000000";
 
