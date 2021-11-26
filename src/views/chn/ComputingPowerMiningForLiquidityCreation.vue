@@ -14,10 +14,7 @@
             <v-card-text>
               <v-row align="center">
                 <v-col class="body-1" cols="12">
-                  <p>
-                    {{ $t("Power Duration") }}：2021-10-21 11:00:00 ~ 2021-11-04
-                    11:00:00
-                  </p>
+                  <p>{{ $t("Power Duration") }}：{{ powerDuration }}</p>
                   <p>
                     {{
                       $t(
@@ -199,6 +196,7 @@ export default {
     loading: false,
     tokenSymbol: "DTC1",
     // 算力合约列表
+    powerDuration: "2021-11-06 11:00:00 ~ 2021-11-26 11:00:00",
     powerContractAddressList: [
       {
         id: 1,
