@@ -71,6 +71,9 @@
                               {{ $t("Staking Rewards Token") }}
                             </th>
                             <th class="text-left">
+                              {{ $t("Receive Amount") }}
+                            </th>
+                            <th class="text-left">
                               {{ $t("Releasable Amount") }}
                             </th>
                             <th class="text-left">
@@ -85,6 +88,9 @@
                             :key="stakingTokenItem.token"
                           >
                             <td>{{ stakingTokenItem.symbol }}</td>
+                            <td>
+                              {{ stakingTokenItem.receiveAmount }}
+                            </td>
                             <td>{{ stakingTokenItem.releasableAmount }}</td>
                             <td>{{ stakingTokenItem.releasedAmount }}</td>
                             <td>
@@ -371,29 +377,49 @@ export default {
             if (this.contractInfo.rewardsRateInfoList.length > 0) {
               const getResultForRelease = this.contractInfo.rewardsRateInfoList.map(
                 async rewardsRateInfo => {
+                  const contractForERC20 = await getContract(
+                    ERC20,
+                    rewardsRateInfo.token,
+                    this.web3
+                  );
+                  const tempInfoBalance = await contractForERC20.methods
+                    .balanceOf(item)
+                    .call();
                   const tempInfoReleasedAmount = await contract.methods
                     .released(rewardsRateInfo.token)
                     .call({ from: this.currentAccount });
                   const tempInfoReleasableAmount = await contract.methods
                     .releasableAmount(rewardsRateInfo.token)
                     .call({ from: this.currentAccount });
-
+                  const tempInfoBalanceFormat = weiToEther(
+                    tempInfoBalance,
+                    this.web3
+                  );
+                  const tempInfoReleasedAmountFormat = weiToEther(
+                    tempInfoReleasedAmount,
+                    this.web3
+                  );
+                  const tempInfoReleasableAmountFormat = weiToEther(
+                    tempInfoReleasableAmount,
+                    this.web3
+                  );
+                  // 封装奖励代币信息
                   const tempInfo = {
                     contractAddress: item,
                     token: rewardsRateInfo.token,
                     rate: rewardsRateInfo.rewardsRate,
                     name: rewardsRateInfo.name,
                     symbol: rewardsRateInfo.symbol,
-                    releasedAmount: weiToEther(
-                      tempInfoReleasedAmount,
-                      this.web3
-                    ),
-                    releasableAmount: weiToEther(
-                      tempInfoReleasableAmount,
-                      this.web3
-                    )
+                    balance: tempInfoBalanceFormat,
+                    releasedAmount: tempInfoReleasedAmountFormat,
+                    releasableAmount: tempInfoReleasableAmountFormat,
+                    receiveAmount:
+                      parseFloat(tempInfoBalanceFormat) +
+                      parseFloat(tempInfoReleasedAmountFormat)
                   };
-                  releaseTokenList.push(tempInfo);
+                  if (tempInfo.receiveAmount > 0) {
+                    releaseTokenList.push(tempInfo);
+                  }
                 }
               );
               await Promise.all(getResultForRelease);
