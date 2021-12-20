@@ -231,6 +231,7 @@ export default {
     "The amount does not meet the requirements":
       "The amount does not meet the requirements"
   },
+  "Staking event has ended": "Staking event has ended",
   "Staking History": "Staking History",
   "Staking Success": "Staking Success",
   "Staking Amount": "Staking Amount",

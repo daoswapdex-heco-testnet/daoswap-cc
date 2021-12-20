@@ -40,7 +40,7 @@
                 </span>
               </v-card-title>
               <v-divider></v-divider>
-              <v-card-text>
+              <v-card-text v-if="!capReached">
                 <form>
                   <v-card-text>
                     <v-text-field
@@ -81,13 +81,13 @@
                   </v-card-actions>
                 </form>
               </v-card-text>
-              <!-- <v-card-text v-else>
+              <v-card-text v-else>
                 <v-row align="center">
                   <v-col class="subtitle-1" cols="12">
-                    {{ $t("Max staking amount exceeded") }}
+                    {{ $t("Staking event has ended") }}
                   </v-col>
                 </v-row>
-              </v-card-text> -->
+              </v-card-text>
             </v-card>
           </v-card>
           <!-- 其它操作 -->
@@ -201,11 +201,15 @@ export default {
     accountAssets: {
       balance: 0,
       allowanceAmount: 0, // 已授权额度
-      toBeReleasableAmount: 0,
-      nodeName: "None"
+      stakedAmount: 0
+      // toBeReleasableAmount: 0,
+      // nodeName: "None"
     },
     // 合约数据
-    maxStakingAmount: 10000,
+    stakedTotalAmount: 0,
+    capReached: false,
+    cap: 0,
+    maxStakingAmount: 0,
     minStakingAmount: 0,
     // 提示框
     operationResult: {
@@ -263,9 +267,21 @@ export default {
           this.$t("StakingLimitForm.The amount does not meet the requirements")
         );
       }
-      if (stakingAmountValue > this.maxStakingAmount) {
+      if (
+        parseFloat(stakingAmountValue) +
+          parseFloat(this.accountAssets.stakedAmount) >
+        this.maxStakingAmount
+      ) {
         errors.push(
           this.$t("StakingLimitForm.The amount exceeds the max staking amount")
+        );
+      }
+      if (
+        parseFloat(stakingAmountValue) + parseFloat(this.stakedTotalAmount) >
+        this.cap
+      ) {
+        errors.push(
+          this.$t("StakingLimitForm.The amount exceeds the cap amount")
         );
       }
       if (stakingAmountValue > this.accountAssets.balance) {
@@ -324,13 +340,28 @@ export default {
         StakingLimitContractAddress,
         this.web3
       );
+      const stakedTotalAmount = await contract.methods
+        .stakedTotalAmount()
+        .call();
+      this.stakedTotalAmount = weiToEther(stakedTotalAmount, this.web3);
+      const cap = await contract.methods.cap().call();
+      this.cap = weiToEther(cap, this.web3);
       const maxStakingAmount = await contract.methods.maxStakingAmount().call();
       this.maxStakingAmount = weiToEther(maxStakingAmount, this.web3);
       const minStakingAmount = await contract.methods.minStakingAmount().call();
       this.minStakingAmount = weiToEther(minStakingAmount, this.web3);
+      this.capReached = await contract.methods.capReached().call();
       const stakingToken = await contract.methods.stakingToken().call();
       const contractERC20DAO = getContract(ERC20DAO, stakingToken, this.web3);
       this.tokenSymbol = await contractERC20DAO.methods.symbol().call();
+
+      const tokenVestingInfo = await contract.methods
+        .tokenVestingList(this.address)
+        .call();
+      this.accountAssets.stakedAmount = weiToEther(
+        tokenVestingInfo.stakedAmount,
+        this.web3
+      );
     },
     // 授权
     handleApprove() {

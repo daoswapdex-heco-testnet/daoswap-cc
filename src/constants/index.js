@@ -32,7 +32,7 @@ export const CrowdsaleForRetailUnlimitedContractAddress =
   "0x23AbBCc5E166e8e741B1DDb0c73d37b7776F4075";
 
 export const StakingLimitContractAddress =
-  "0x61B6AEb96435E5C29Bc8F7149594c74350123722";
+  "0x35F773027BD046340adB7F2486b8082304bC1D8d";
 
 /********** base **********/
 export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";
