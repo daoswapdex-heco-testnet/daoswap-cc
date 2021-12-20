@@ -11,6 +11,8 @@ import ComputingPowerMiningForLiquidity from "../views/chn/ComputingPowerMiningF
 import ComputingPowerMiningForLiquidityCreation from "../views/chn/ComputingPowerMiningForLiquidityCreation.vue";
 import CrowdsaleForRetailUnlimited from "../views/crowdsale/crowdsaleForRetailUnlimited/CrowdsaleForRetailUnlimited.vue";
 import CrowdsaleForRetailUnlimitedHistory from "../views/crowdsale/crowdsaleForRetailUnlimited/CrowdsaleForRetailUnlimitedHistory.vue";
+import StakingLimit from "../views/staking/StakingLimit.vue";
+import StakingLimitHistory from "../views/staking/StakingLimitHistory.vue";
 
 Vue.use(VueRouter);
 
@@ -62,6 +64,24 @@ const routes = [
             path: "/stake-dst/history",
             name: "CrowdsaleForRetailUnlimitedHistory",
             component: CrowdsaleForRetailUnlimitedHistory
+          }
+        ]
+      },
+      {
+        path: "/staking",
+        name: "Staking",
+        redirect: "/staking/limit",
+        component: () => import("@/layouts/home/ViewBlank.vue"),
+        children: [
+          {
+            path: "/staking/limit",
+            name: "StakingLimit",
+            component: StakingLimit
+          },
+          {
+            path: "/staking/limit/history",
+            name: "StakingLimitHistory",
+            component: StakingLimitHistory
           }
         ]
       },

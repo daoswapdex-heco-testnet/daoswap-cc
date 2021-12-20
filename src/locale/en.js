@@ -213,5 +213,28 @@ export default {
   "DST Staked History": "DST Staked History",
   "DST Staked Success": "DST Staked Success",
   "DST Stake Duration": "Staked Duration",
-  "DST Staked Amount": "DST Staked Amount"
+  "DST Staked Amount": "DST Staked Amount",
+
+  "Stake Limit": "Stake Limit",
+  StakingLimit: "StakingLimit",
+  "Staking Limit": "Staking Limit",
+  "Enter the staking amount": "Enter the staking amount",
+  Staking: "Staking",
+  StakingLimitForm: {
+    "Staking Amount": "Staking Amount",
+    "The amount exceeds the balance": "The amount exceeds the balance",
+    "The amount exceeds the max staking amount":
+      "The amount exceeds the max staking amount",
+    "The amount is be gt zero": "The amount is be gt zero",
+    "Invalid amount": "Invalid amount",
+    "The amount is required": "The amount is required",
+    "The amount does not meet the requirements":
+      "The amount does not meet the requirements"
+  },
+  "Staking History": "Staking History",
+  "Staking Success": "Staking Success",
+  "Staking Amount": "Staking Amount",
+  "Staking Start Time": "Staking Start Time",
+  "Staking Duration": "Staking Duration",
+  "Staking Rewards Token": "Staking Rewards Token"
 };
