@@ -4,10 +4,10 @@
       <v-row justify="center">
         <v-col md="6">
           <!-- 数据显示 -->
-          <!-- <v-card justify="center" class="fill-width">
+          <v-card justify="center" class="fill-width">
             <v-card-title>
               <span class="title font-weight-bold text-h5">
-                {{ $t("Status") }}
+                {{ $t("Staking Status") }}
               </span>
             </v-card-title>
             <v-divider></v-divider>
@@ -15,19 +15,19 @@
               <v-row align="center">
                 <v-col class="body-1" cols="12">
                   <p>
-                    {{
-                      $t("Current staking to be released") + " " + tokenSymbol
-                    }}：{{ accountAssets.toBeReleasableAmount }}
+                    {{ $t("Staking Total Amount") }}：{{
+                      accountAssets.stakedAmount
+                    }}
+                    {{ tokenSymbol }}
                   </p>
                   <p>
-                    {{ $t("Hash power node (NH) status") }}：{{
-                      $t(`Node.${accountAssets.nodeName}`)
-                    }}
+                    {{ $t("Staking Enable Amount") }}：{{ maxStakingAmount }}
+                    {{ tokenSymbol }}
                   </p>
                 </v-col>
               </v-row>
             </v-card-text>
-          </v-card> -->
+          </v-card>
           <!-- 操作 -->
           <v-card class="fill-width mt-10">
             <v-card outlined>
@@ -47,7 +47,9 @@
                       :label="
                         `${$t('Enter the staking amount')}(${$t(
                           'At least'
-                        )} ${minStakingAmount} ${tokenSymbol})`
+                        )} ${minStakingAmount} ${tokenSymbol}, ${$t(
+                          'At mostest'
+                        )} ${maxStakingAmount} ${tokenSymbol})`
                       "
                       v-model="stakingAmount"
                       :error-messages="stakingAmountErrors"
@@ -362,6 +364,16 @@ export default {
         tokenVestingInfo.stakedAmount,
         this.web3
       );
+      // 计算最多可质押数量
+      const remainingStakingAmount =
+        parseFloat(this.cap) - parseFloat(this.stakedTotalAmount);
+      const enableStakingAmount =
+        parseFloat(this.maxStakingAmount) -
+        parseFloat(this.accountAssets.stakedAmount);
+      this.maxStakingAmount =
+        remainingStakingAmount < enableStakingAmount
+          ? remainingStakingAmount
+          : enableStakingAmount;
     },
     // 授权
     handleApprove() {

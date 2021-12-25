@@ -159,6 +159,7 @@ export default {
   "Choose a forging pool": "Choose a forging pool",
   "Enter the forging amount": "Enter the forging amount",
   "At least": "At least",
+  "At mostest": "At mostest",
   BurnForging: "BurnForging",
   BurnForgingForm: {
     "BurnForging Amount": "BurnForging Amount",
@@ -215,11 +216,12 @@ export default {
   "DST Stake Duration": "Staked Duration",
   "DST Staked Amount": "DST Staked Amount",
 
-  "Stake Limit": "Stake Limit",
-  StakingLimit: "StakingLimit",
+  "Stake Limit": "Hash Node Staking",
+  StakingLimit: "Hash Node Staking",
   "Staking Limit": "Staking Limit",
   "Enter the staking amount": "Enter the staking amount",
   Staking: "Staking",
+  "Staking Status": "Staking Status",
   StakingLimitForm: {
     "Staking Amount": "Staking Amount",
     "The amount exceeds the balance": "The amount exceeds the balance",
@@ -235,6 +237,8 @@ export default {
   "Staking History": "Staking History",
   "Staking Success": "Staking Success",
   "Staking Amount": "Staking Amount",
+  "Staking Total Amount": "Staking Amount",
+  "Staking Enable Amount": "Staking Enable Amount",
   "Staking Start Time": "Staking Start Time",
   "Staking Duration": "Staking Duration",
   "Staking Rewards Token": "Staking Rewards Token"

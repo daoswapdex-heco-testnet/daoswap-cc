@@ -48,7 +48,7 @@
                   class="ma-2"
                 >
                   <v-card-title>
-                    {{ $t("Staking Amount") }}: {{ item.stakedAmount }}
+                    {{ $t("Staking Total Amount") }}: {{ item.stakedAmount }}
                     {{ item.stakingTokenInfo.tokenSymbol }}
                   </v-card-title>
                   <v-divider class="mx-4"></v-divider>
@@ -425,6 +425,7 @@ export default {
               await Promise.all(getResultForRelease);
             }
             // 组装对象
+            releaseTokenList.sort(compare("token"));
             const tempVesting = {
               contractAddress: item,
               stakingToken: stakingToken,

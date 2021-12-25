@@ -155,10 +155,11 @@ export default {
   "Choose a forging pool": "选择锻造矿池",
   "Enter the forging amount": "输入锻造额度",
   "At least": "最少",
+  "At mostest": "最多",
   BurnForging: "锻造",
   BurnForgingForm: {
     "BurnForging Amount": "锻造额度",
-    "The amount exceeds the balance": "金额超过可账户余额",
+    "The amount exceeds the balance": "金额超过可用账户余额",
     "The amount exceeds the max forgeable amount": "金额超过最大可锻造额度",
     "The amount is be gt zero": "锻造额度必须大于0",
     "Invalid amount": "不可用的数值",
@@ -209,27 +210,28 @@ export default {
   "DST Stake Duration": "质押周期",
   "DST Staked Amount": "DST质押数量",
 
-  "Stake Limit": "Stake Limit",
-  StakingLimit: "StakingLimit",
-  "Staking Limit": "Staking Limit",
-  "Enter the staking amount": "Enter the staking amount",
-  Staking: "Staking",
+  "Stake Limit": "算力节点质押",
+  StakingLimit: "算力节点质押",
+  "Staking Limit": "算力节点质押",
+  "Enter the staking amount": "请输入质押DAO/USDT LP数量",
+  Staking: "质押",
+  "Staking Status": "质押情况",
   StakingLimitForm: {
-    "Staking Amount": "Staking Amount",
-    "The amount exceeds the balance": "The amount exceeds the balance",
-    "The amount exceeds the max staking amount":
-      "The amount exceeds the max staking amount",
-    "The amount is be gt zero": "The amount is be gt zero",
-    "Invalid amount": "Invalid amount",
-    "The amount is required": "The amount is required",
-    "The amount does not meet the requirements":
-      "The amount does not meet the requirements"
+    "Staking Amount": "质押额度",
+    "The amount exceeds the balance": "金额超过可用账户余额",
+    "The amount exceeds the max staking amount": "金额超过最大可质押额度",
+    "The amount is be gt zero": "质押额度必须大于0",
+    "Invalid amount": "不可用的数值",
+    "The amount is required": "请填写质押额度",
+    "The amount does not meet the requirements": "质押额度不符合要求"
   },
-  "Staking event has ended": "Staking event has ended",
-  "Staking History": "Staking History",
-  "Staking Success": "Staking Success",
-  "Staking Amount": "Staking Amount",
-  "Staking Start Time": "Staking Start Time",
-  "Staking Duration": "Staking Duration",
-  "Staking Rewards Token": "Staking Rewards Token"
+  "Staking event has ended": "质押已结束",
+  "Staking History": "质押记录",
+  "Staking Success": "质押成功",
+  "Staking Amount": "质押额度",
+  "Staking Total Amount": "质押LP总量",
+  "Staking Enable Amount": "可质押额度",
+  "Staking Start Time": "质押开始时间",
+  "Staking Duration": "质押期限",
+  "Staking Rewards Token": "奖励Token"
 };
