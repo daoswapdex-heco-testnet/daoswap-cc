@@ -181,7 +181,10 @@
 import { validationMixin } from "vuelidate";
 import { required, decimal } from "vuelidate/lib/validators";
 import clip from "@/utils/clipboard";
-import { DAOAddress, StakingLimitContractAddress } from "@/constants";
+import {
+  StakingLimitTokenAddress,
+  StakingLimitContractAddress
+} from "@/constants";
 import { getContract, weiToEther, etherToWei } from "@/utils/web3";
 // 引入合约 ABI 文件
 import ERC20DAO from "@/constants/contractJson/ERC20DAO.json";
@@ -325,7 +328,11 @@ export default {
     // 获取账号信息
     async getAccountAssets() {
       // 查询当前账号余额
-      const contractERC20DAO = getContract(ERC20DAO, DAOAddress, this.web3);
+      const contractERC20DAO = getContract(
+        ERC20DAO,
+        StakingLimitTokenAddress,
+        this.web3
+      );
       const balance = await contractERC20DAO.methods
         .balanceOf(this.address)
         .call();
@@ -379,7 +386,7 @@ export default {
     handleApprove() {
       this.loading = true;
       // 执行合约
-      getContract(ERC20DAO, DAOAddress, this.web3)
+      getContract(ERC20DAO, StakingLimitTokenAddress, this.web3)
         .methods.approve(
           StakingLimitContractAddress,
           etherToWei(this.stakingAmount, this.web3)
