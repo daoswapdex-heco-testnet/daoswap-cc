@@ -15,6 +15,9 @@ export default {
   Creation: "Creation",
 
   Close: "Close",
+  "No Data": "No Data",
+  Phase: "Phase",
+  Expect: "",
 
   "Stake Amount": "Stake Amount",
   "Stake begin in": "Stake begin in",
@@ -199,7 +202,6 @@ export default {
   "Power Node Hash Value": "Node Hash Value",
   "Power Node Status": "Node Status",
   "Power DAO-USDT Liquidity Value": "DAO-USDT Liquidity Value",
-  "No Data": "No Data",
   "Power Phase": "Phase",
   "Power Expect": "",
 
@@ -216,13 +218,28 @@ export default {
   "DST Stake Duration": "Staked Duration",
   "DST Staked Amount": "DST Staked Amount",
 
-  "Stake Limit": "Hash Node Staking",
-  StakingLimit: "Hash Node Staking",
-  "Staking Limit": "Staking Limit",
-  "Enter the staking amount": "Enter the staking amount",
+  "Stake LP": "Hash Node Staking",
+  StakingLP: "Hash Node Staking",
+  "Staking LP": "Staking LP",
+  "Stake Single": "Staking DAO",
+  StakingSingle: "Staking DAO",
+  "Staking Single": "Staking DAO",
+  "Enter the staking lp amount": "Enter the staking amount",
+  "Enter the staking single amount": "Enter the staking amount",
   Staking: "Staking",
   "Staking Status": "Staking Status",
-  StakingLimitForm: {
+  StakingLPForm: {
+    "Staking Amount": "Staking Amount",
+    "The amount exceeds the balance": "The amount exceeds the balance",
+    "The amount exceeds the max staking amount":
+      "The amount exceeds the max staking amount",
+    "The amount is be gt zero": "The amount is be gt zero",
+    "Invalid amount": "Invalid amount",
+    "The amount is required": "The amount is required",
+    "The amount does not meet the requirements":
+      "The amount does not meet the requirements"
+  },
+  StakingSingleForm: {
     "Staking Amount": "Staking Amount",
     "The amount exceeds the balance": "The amount exceeds the balance",
     "The amount exceeds the max staking amount":
@@ -241,5 +258,15 @@ export default {
   "Staking Enable Amount": "Staking Enable Amount",
   "Staking Start Time": "Staking Start Time",
   "Staking Duration": "Staking Duration",
-  "Staking Rewards Token": "Staking Rewards Token"
+  "Staking Rewards Token": "Staking Rewards Token",
+
+  "Rewards Duration": "Rewards Duration",
+  "Staking Node Rewards": "Staking Node Rewards",
+  "Rewards All Staking": "Rewards All Staking",
+  "Rewards Node Proportion": "Rewards Node Proportion",
+  "Stellar New Quantity": "Stellar New Quantity",
+  "Planetary New Quantity": "Planetary New Quantity",
+  "Account New Quantity": "Account New Quantity",
+
+  "Task 6": "Task 6"
 };

@@ -15,6 +15,9 @@ export default {
   Creation: "创世",
 
   Close: "关闭",
+  "No Data": "暂无数据",
+  Phase: "第",
+  Expect: "期",
 
   "Stake Amount": "质押额度",
   "Stake begin in": "认购开始于",
@@ -193,7 +196,6 @@ export default {
   "Power Node Hash Value": "节点算力价值",
   "Power Node Status": "节点状态",
   "Power DAO-USDT Liquidity Value": "DAO-USDT流动性价值",
-  "No Data": "暂无数据",
   "Power Phase": "第",
   "Power Expect": "期",
 
@@ -210,13 +212,26 @@ export default {
   "DST Stake Duration": "质押周期",
   "DST Staked Amount": "DST质押数量",
 
-  "Stake Limit": "算力节点质押",
-  StakingLimit: "算力节点质押",
-  "Staking Limit": "算力节点质押",
-  "Enter the staking amount": "请输入质押DAO/USDT LP数量",
+  "Stake LP": "算力节点质押",
+  StakingLP: "算力节点质押",
+  "Staking LP": "算力节点质押",
+  "Stake Single": "DAO单币质押",
+  StakingSingle: "DAO单币质押",
+  "Staking Single": "DAO单币质押",
+  "Enter the staking lp amount": "请输入质押DAO/USDT LP数量",
+  "Enter the staking single amount": "请输入质押DAO数量",
   Staking: "质押",
   "Staking Status": "质押情况",
-  StakingLimitForm: {
+  StakingLPForm: {
+    "Staking Amount": "质押额度",
+    "The amount exceeds the balance": "金额超过可用账户余额",
+    "The amount exceeds the max staking amount": "金额超过最大可质押额度",
+    "The amount is be gt zero": "质押额度必须大于0",
+    "Invalid amount": "不可用的数值",
+    "The amount is required": "请填写质押额度",
+    "The amount does not meet the requirements": "质押额度不符合要求"
+  },
+  StakingSingleForm: {
     "Staking Amount": "质押额度",
     "The amount exceeds the balance": "金额超过可用账户余额",
     "The amount exceeds the max staking amount": "金额超过最大可质押额度",
@@ -233,5 +248,15 @@ export default {
   "Staking Enable Amount": "可质押额度",
   "Staking Start Time": "质押开始时间",
   "Staking Duration": "质押期限",
-  "Staking Rewards Token": "奖励Token"
+  "Staking Rewards Token": "奖励Token",
+
+  "Rewards Duration": "奖励周期",
+  "Staking Node Rewards": "质押节点奖励",
+  "Rewards All Staking": "质押总奖励",
+  "Rewards Node Proportion": "奖励占比",
+  "Stellar New Quantity": "新增恒星节点数量",
+  "Planetary New Quantity": "新增行星节点数量",
+  "Account New Quantity": "新增普通账号节点数量",
+
+  "Task 6": "任务6"
 };

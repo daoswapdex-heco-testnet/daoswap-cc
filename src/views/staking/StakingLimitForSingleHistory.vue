@@ -198,7 +198,7 @@
 
 <script>
 import clip from "@/utils/clipboard";
-import { StakingLimitContractAddress } from "@/constants";
+import { StakingLimitForSingleContractAddress } from "@/constants";
 import { getContract, weiToEther, toChecksumAddress } from "@/utils/web3";
 import { compare } from "@/filters/index";
 // 引入合约 ABI 文件
@@ -207,7 +207,7 @@ import StakingLimit from "@/constants/contractJson/StakingLimit.json";
 import TokenVesting from "@/constants/contractJson/TokenVesting.json";
 
 export default {
-  name: "StakingLimitHistory",
+  name: "StakingLimitForSingleHistory",
   data: () => ({
     loading: false,
     // 当前账户相关信息
@@ -289,7 +289,7 @@ export default {
     async getAccountAssets() {
       const contract = getContract(
         StakingLimit,
-        StakingLimitContractAddress,
+        StakingLimitForSingleContractAddress,
         this.web3
       );
       this.accountAssets.tokenVestingAddressList = await contract.methods
@@ -300,7 +300,7 @@ export default {
     async getContractInfo() {
       const contract = getContract(
         StakingLimit,
-        StakingLimitContractAddress,
+        StakingLimitForSingleContractAddress,
         this.web3
       );
       const rewardsRateInfoList = await contract.methods

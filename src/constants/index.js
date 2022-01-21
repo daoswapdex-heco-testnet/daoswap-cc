@@ -31,10 +31,15 @@ export const BecomeCGNContractAddress =
 export const CrowdsaleForRetailUnlimitedContractAddress =
   "0x23AbBCc5E166e8e741B1DDb0c73d37b7776F4075";
 
-export const StakingLimitTokenAddress =
-  "0xc096332CAacF00319703558988aD03eC6586e704";
-export const StakingLimitContractAddress =
+export const StakingLimitForLPTokenAddress =
+  "0xd2f169c79553654452a3889b210AEeF494eB2374";
+export const StakingLimitForLPContractAddress =
   "0x35F773027BD046340adB7F2486b8082304bC1D8d";
+
+export const StakingLimitForSingleTokenAddress =
+  "0xd2f169c79553654452a3889b210AEeF494eB2374";
+export const StakingLimitForSingleContractAddress =
+  "0xeE0cCA441a267bD4719f296EFDa6d04b2ccDdb5D";
 
 /********** base **********/
 export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";

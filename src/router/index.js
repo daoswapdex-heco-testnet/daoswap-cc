@@ -11,8 +11,11 @@ import ComputingPowerMiningForLiquidity from "../views/chn/ComputingPowerMiningF
 import ComputingPowerMiningForLiquidityCreation from "../views/chn/ComputingPowerMiningForLiquidityCreation.vue";
 import CrowdsaleForRetailUnlimited from "../views/crowdsale/crowdsaleForRetailUnlimited/CrowdsaleForRetailUnlimited.vue";
 import CrowdsaleForRetailUnlimitedHistory from "../views/crowdsale/crowdsaleForRetailUnlimited/CrowdsaleForRetailUnlimitedHistory.vue";
-import StakingLimit from "../views/staking/StakingLimit.vue";
-import StakingLimitHistory from "../views/staking/StakingLimitHistory.vue";
+import StakingLimitForLP from "../views/staking/StakingLimitForLP.vue";
+import StakingLimitForLPHistory from "../views/staking/StakingLimitForLPHistory.vue";
+import StakingLimitForSingle from "../views/staking/StakingLimitForSingle.vue";
+import StakingLimitForSingleHistory from "../views/staking/StakingLimitForSingleHistory.vue";
+import StakingNodeRewards from "../views/staking-node/StakingNodeRewards.vue";
 
 Vue.use(VueRouter);
 
@@ -69,19 +72,29 @@ const routes = [
       },
       {
         path: "/staking",
-        name: "Staking",
-        redirect: "/staking/limit",
+        name: "StakingLP",
+        redirect: "/staking/lp",
         component: () => import("@/layouts/home/ViewBlank.vue"),
         children: [
           {
-            path: "/staking/limit",
-            name: "StakingLimit",
-            component: StakingLimit
+            path: "/staking/lp",
+            name: "StakingLimitForLP",
+            component: StakingLimitForLP
           },
           {
-            path: "/staking/limit/history",
-            name: "StakingLimitHistory",
-            component: StakingLimitHistory
+            path: "/staking/lp/history",
+            name: "StakingLimitForLPHistory",
+            component: StakingLimitForLPHistory
+          },
+          {
+            path: "/staking/single",
+            name: "StakingLimitForSingle",
+            component: StakingLimitForSingle
+          },
+          {
+            path: "/staking/single/history",
+            name: "StakingLimitForSingleHistory",
+            component: StakingLimitForSingleHistory
           }
         ]
       },
@@ -117,6 +130,11 @@ const routes = [
         path: "/competition-mining",
         name: "Competition Mining",
         component: ComputingPowerMiningForLiquidityCreation
+      },
+      {
+        path: "/task-6",
+        name: "StakingNodeRewards",
+        component: StakingNodeRewards
       },
       {
         path: "/invite",

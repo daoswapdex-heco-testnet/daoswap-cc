@@ -51,12 +51,20 @@
             >{{ $t("Stake DST") }}</v-tab
           >
           <v-tab
-            to="/staking"
+            to="/staking/lp"
             :ripple="false"
             class="font-weight-bold"
             min-width="96"
             text
-            >{{ $t("Stake Limit") }}</v-tab
+            >{{ $t("Stake LP") }}</v-tab
+          >
+          <v-tab
+            to="/staking/single"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("Stake Single") }}</v-tab
           >
           <v-tab
             to="/airdrop"
@@ -81,6 +89,14 @@
             min-width="96"
             text
             >{{ $t("Competition Mining") }}</v-tab
+          >
+          <v-tab
+            to="/task-6"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("Task 6") }}</v-tab
           >
           <!-- <v-tab
             to="/chn"
@@ -142,8 +158,11 @@
           <v-list-item to="/stake-dst">
             <v-list-item-title>{{ $t("Stake DST") }}</v-list-item-title>
           </v-list-item>
-          <v-list-item to="/staking">
-            <v-list-item-title>{{ $t("Stake Limit") }}</v-list-item-title>
+          <v-list-item to="/staking/lp">
+            <v-list-item-title>{{ $t("Stake LP") }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/staking/single">
+            <v-list-item-title>{{ $t("Stake Single") }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/airdrop">
             <v-list-item-title>{{ $t("Airdrop") }}</v-list-item-title>
@@ -155,6 +174,9 @@
             <v-list-item-title>{{
               $t("Competition Mining")
             }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/task-6">
+            <v-list-item-title>{{ $t("Task 6") }}</v-list-item-title>
           </v-list-item>
           <!-- <v-list-item to="/chn">
             <v-list-item-title>{{ $t("CHN") }}</v-list-item-title>
