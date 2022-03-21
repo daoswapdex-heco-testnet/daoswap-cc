@@ -268,5 +268,22 @@ export default {
   "Planetary New Quantity": "Planetary New Quantity",
   "Account New Quantity": "Account New Quantity",
 
-  "Task 6": "Task 6"
+  "Task 6": "Task 6",
+
+  ACC: "ACC",
+  "Apply Cross Chain": "Apply Cross Chain",
+  "Enter the cross chain amount": "Enter the cross chain amount",
+  Apply: "Apply",
+  ApplyForm: {
+    "Apply Amount": "Apply Amount",
+    "The amount exceeds the balance": "The amount exceeds the balance",
+    "The amount exceeds the max apply amount":
+      "The amount exceeds the max apply amount",
+    "The amount is be gt zero": "The amount is be gt zero",
+    "Invalid amount": "Invalid amount",
+    "The amount is required": "The amount is required",
+    "The amount does not meet the requirements":
+      "The amount does not meet the requirements"
+  },
+  "Apply Success": "Apply Success"
 };

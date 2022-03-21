@@ -115,6 +115,14 @@
             >{{ $t("Invite") }}</v-tab
           >
           <v-tab
+            to="/cross-chain"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+            >{{ $t("ACC") }}</v-tab
+          >
+          <v-tab
             to="/Whitepaper.pdf"
             target="_blank"
             :ripple="false"
@@ -183,6 +191,9 @@
           </v-list-item> -->
           <v-list-item to="/invite">
             <v-list-item-title>{{ $t("Invite") }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/cross-chain">
+            <v-list-item-title>{{ $t("ACC") }}</v-list-item-title>
           </v-list-item>
           <v-list-item to="/Whitepaper.pdf" target="_blank">
             <v-list-item-title>{{ $t("Whitepaper") }}</v-list-item-title>

@@ -16,6 +16,7 @@ import StakingLimitForLPHistory from "../views/staking/StakingLimitForLPHistory.
 import StakingLimitForSingle from "../views/staking/StakingLimitForSingle.vue";
 import StakingLimitForSingleHistory from "../views/staking/StakingLimitForSingleHistory.vue";
 import StakingNodeRewards from "../views/staking-node/StakingNodeRewards.vue";
+import ApplyCrossChain from "../views/token-cross-chain/ApplyCrossChain.vue";
 
 Vue.use(VueRouter);
 
@@ -140,6 +141,19 @@ const routes = [
         path: "/invite",
         name: "Invite",
         component: AirdropToRelationship
+      },
+      {
+        path: "/cross-chain",
+        name: "CrossChain",
+        redirect: "/cross-chain/apply",
+        component: () => import("@/layouts/home/ViewBlank.vue"),
+        children: [
+          {
+            path: "/cross-chain/apply",
+            name: "ApplyCrossChain",
+            component: ApplyCrossChain
+          }
+        ]
       },
       {
         path: "*",

@@ -258,5 +258,20 @@ export default {
   "Planetary New Quantity": "新增行星节点数量",
   "Account New Quantity": "新增普通账号节点数量",
 
-  "Task 6": "任务6"
+  "Task 6": "任务6",
+
+  ACC: "跨链",
+  "Apply Cross Chain": "申请跨链",
+  "Enter the cross chain amount": "输入跨链额度",
+  Apply: "申请",
+  ApplyForm: {
+    "Apply Amount": "申请额度",
+    "The amount exceeds the balance": "金额超过可用账户余额",
+    "The amount exceeds the max apply amount": "金额超过最大可申请额度",
+    "The amount is be gt zero": "申请额度必须大于0",
+    "Invalid amount": "不可用的数值",
+    "The amount is required": "请填写申请额度",
+    "The amount does not meet the requirements": "申请额度不符合要求"
+  },
+  "Apply Success": "申请成功"
 };
