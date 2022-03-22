@@ -15,7 +15,7 @@
                 </span>
               </v-card-title>
               <v-divider></v-divider>
-              <v-card-text>
+              <v-card-text v-if="isOpen">
                 <form>
                   <v-card-text>
                     <v-text-field
@@ -58,13 +58,13 @@
                   </v-card-actions>
                 </form>
               </v-card-text>
-              <!-- <v-card-text v-else>
+              <v-card-text v-else>
                 <v-row align="center">
                   <v-col class="subtitle-1" cols="12">
-                    {{ $t("Staking event has ended") }}
+                    {{ $t("Not within the application time frame") }}
                   </v-col>
                 </v-row>
-              </v-card-text> -->
+              </v-card-text>
             </v-card>
           </v-card>
           <!-- 当前钱包账号 -->
@@ -182,6 +182,10 @@ export default {
     currentDayTimestamp: 0,
     minApplyAmount: 0,
     maxApplyAmount: 0,
+    isWhitelist: false,
+    startTime: 0,
+    endTime: 0,
+    isOpen: false,
     // 提示框
     operationResult: {
       color: "success",
@@ -230,15 +234,17 @@ export default {
       if (applyAmountValue <= 0) {
         errors.push(this.$t("ApplyForm.The amount is be gt zero"));
       }
-      if (applyAmountValue > 0 && applyAmountValue < this.minApplyAmount) {
-        errors.push(
-          this.$t("ApplyForm.The amount does not meet the requirements")
-        );
-      }
-      if (parseFloat(applyAmountValue) > this.maxApplyAmount) {
-        errors.push(
-          this.$t("ApplyForm.The amount exceeds the max apply amount")
-        );
+      if (!this.isWhitelist) {
+        if (applyAmountValue > 0 && applyAmountValue < this.minApplyAmount) {
+          errors.push(
+            this.$t("ApplyForm.The amount does not meet the requirements")
+          );
+        }
+        if (parseFloat(applyAmountValue) > this.maxApplyAmount) {
+          errors.push(
+            this.$t("ApplyForm.The amount exceeds the max apply amount")
+          );
+        }
       }
       if (applyAmountValue > this.accountAssets.balance) {
         errors.push(this.$t("ApplyForm.The amount exceeds the balance"));
@@ -278,16 +284,16 @@ export default {
     },
     // 获取账号信息
     async getAccountAssets() {
-      // 查询当前账号余额
-      const contractERC20DAO = getContract(ERC20DAO, DAOAddress, this.web3);
-      const balance = await contractERC20DAO.methods
-        .balanceOf(this.address)
-        .call();
-      const allowance = await contractERC20DAO.methods
-        .allowance(this.address, TokenCrossChainContractAddress)
-        .call();
-      this.accountAssets.balance = weiToEther(balance, this.web3);
-      this.accountAssets.allowanceAmount = weiToEther(allowance, this.web3);
+      // // 查询当前账号余额
+      // const contractERC20DAO = getContract(ERC20DAO, DAOAddress, this.web3);
+      // const balance = await contractERC20DAO.methods
+      //   .balanceOf(this.address)
+      //   .call();
+      // const allowance = await contractERC20DAO.methods
+      //   .allowance(this.address, TokenCrossChainContractAddress)
+      //   .call();
+      // this.accountAssets.balance = weiToEther(balance, this.web3);
+      // this.accountAssets.allowanceAmount = weiToEther(allowance, this.web3);
     },
     // 获取合约信息
     async getContractInfo() {
@@ -320,6 +326,14 @@ export default {
       });
       this.minApplyAmount = weiToEther(applyLimit[0], this.web3);
       this.maxApplyAmount = weiToEther(applyLimit[1], this.web3);
+      // get is in white list
+      const isWhitelist = await contract.methods.isWhitelist().call({
+        from: this.address
+      });
+      this.isWhitelist =
+        isWhitelist &&
+        JSBI.greaterThan(JSBI.BigInt(applyLimit[0]), JSBI.BigInt(0)) &&
+        JSBI.greaterThan(JSBI.BigInt(applyLimit[1]), JSBI.BigInt(0));
       // get dayCap
       const dayCap = await contract.methods.dayCap().call();
       // get dayTotalAmount
@@ -340,7 +354,24 @@ export default {
       const endTime = await contract.methods.endTime().call({
         from: this.address
       });
-      console.info(startTime, endTime);
+      this.startTime = JSBI.add(
+        JSBI.BigInt(startTime),
+        JSBI.BigInt(this.currentDayTimestamp)
+      ).toString();
+      this.endTime = JSBI.add(
+        JSBI.BigInt(endTime),
+        JSBI.BigInt(this.currentDayTimestamp)
+      ).toString();
+      const nowTime = Math.floor(Date.now() / 1000);
+      this.isOpen =
+        JSBI.lessThanOrEqual(
+          JSBI.BigInt(this.startTime),
+          JSBI.BigInt(nowTime)
+        ) &&
+        JSBI.greaterThanOrEqual(
+          JSBI.BigInt(this.endTime),
+          JSBI.BigInt(nowTime)
+        );
       // 计算最多可申请数量
       const remainingApplyAmount = JSBI.subtract(
         JSBI.BigInt(dayCap),

@@ -273,5 +273,6 @@ export default {
     "The amount is required": "请填写申请额度",
     "The amount does not meet the requirements": "申请额度不符合要求"
   },
-  "Apply Success": "申请成功"
+  "Apply Success": "申请成功",
+  "Not within the application time frame": "不在申请时间范围内"
 };

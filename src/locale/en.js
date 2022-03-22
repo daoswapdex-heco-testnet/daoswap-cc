@@ -285,5 +285,7 @@ export default {
     "The amount does not meet the requirements":
       "The amount does not meet the requirements"
   },
-  "Apply Success": "Apply Success"
+  "Apply Success": "Apply Success",
+  "Not within the application time frame":
+    "Not within the application time frame"
 };
