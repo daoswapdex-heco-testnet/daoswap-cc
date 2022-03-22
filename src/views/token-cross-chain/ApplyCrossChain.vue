@@ -180,7 +180,7 @@ export default {
     },
     // 合约数据
     currentDayTimestamp: 0,
-    minApplyAmount: 0,
+    minApplyAmount: 0.01,
     maxApplyAmount: 0,
     isWhitelist: false,
     startTime: 0,
@@ -321,19 +321,60 @@ export default {
         .getCurrentDayTimestamp()
         .call();
       // get apply amount limit
+      // 最大每日限额 = 计算出来的每日最大限额 - 每日已申请额度
       const applyLimit = await contract.methods.getApplyLimitAmount().call({
         from: this.address
       });
-      this.minApplyAmount = weiToEther(applyLimit[0], this.web3);
-      this.maxApplyAmount = weiToEther(applyLimit[1], this.web3);
+      const maxAmountForDay = applyLimit[0];
+      // 获取最大总申请额度
+      let maxAmountForTotal = applyLimit[1];
+      const timestampList = await contract.methods
+        .getTimpstampListByAccount()
+        .call({
+          form: this.address
+        });
+      if (timestampList.length > 0) {
+        const getResult = timestampList.map(async item => {
+          const amount = await contract.methods.getApplyAmount(item).call({
+            from: this.address
+          });
+          const diffAmountForTotal = JSBI.subtract(
+            JSBI.BigInt(maxAmountForTotal),
+            JSBI.BigInt(amount)
+          );
+          maxAmountForTotal = diffAmountForTotal.toString();
+        });
+        await Promise.all(getResult);
+      }
+      // 如果最大总申请额度大于或等于每日最大限额，以每日最大限额为准
+      // 如果最大总申请额度小于每日最大限额，以最大总申请额度为准
+      const realMaxAmountLimit = JSBI.lessThan(
+        JSBI.BigInt(maxAmountForDay),
+        JSBI.BigInt(maxAmountForTotal)
+      )
+        ? JSBI.greaterThanOrEqual(JSBI.BigInt(maxAmountForDay), JSBI.BigInt(0))
+          ? maxAmountForDay
+          : 0
+        : JSBI.greaterThanOrEqual(
+            JSBI.BigInt(maxAmountForTotal),
+            JSBI.BigInt(0)
+          )
+        ? maxAmountForTotal
+        : 0;
+
+      // this.minApplyAmount = 1;
+      this.maxApplyAmount = weiToEther(
+        realMaxAmountLimit.toString(),
+        this.web3
+      );
       // get is in white list
-      const isWhitelist = await contract.methods.isWhitelist().call({
+      this.isWhitelist = await contract.methods.isWhitelist().call({
         from: this.address
       });
-      this.isWhitelist =
-        isWhitelist &&
-        JSBI.greaterThan(JSBI.BigInt(applyLimit[0]), JSBI.BigInt(0)) &&
-        JSBI.greaterThan(JSBI.BigInt(applyLimit[1]), JSBI.BigInt(0));
+      // this.isWhitelist =
+      //   isWhitelist &&
+      //   JSBI.greaterThan(JSBI.BigInt(applyLimit[0]), JSBI.BigInt(0)) &&
+      //   JSBI.greaterThan(JSBI.BigInt(applyLimit[1]), JSBI.BigInt(0));
       // get dayCap
       const dayCap = await contract.methods.dayCap().call();
       // get dayTotalAmount
@@ -378,15 +419,25 @@ export default {
         JSBI.BigInt(dayTotalAmount)
       );
       const enableApplyAmount = JSBI.subtract(
-        JSBI.BigInt(applyLimit[1]),
+        JSBI.BigInt(realMaxAmountLimit.toString()),
         JSBI.BigInt(currentDayApplyAmount)
       );
       this.maxApplyAmount = JSBI.lessThan(
         remainingApplyAmount,
         enableApplyAmount
       )
-        ? weiToEther(remainingApplyAmount.toString(), this.web3)
-        : weiToEther(enableApplyAmount.toString(), this.web3);
+        ? weiToEther(
+            JSBI.greaterThanOrEqual(remainingApplyAmount, JSBI.BigInt(0))
+              ? remainingApplyAmount.toString()
+              : 0,
+            this.web3
+          )
+        : weiToEther(
+            JSBI.greaterThanOrEqual(enableApplyAmount, JSBI.BigInt(0))
+              ? enableApplyAmount.toString()
+              : 0,
+            this.web3
+          );
     },
     // 授权
     handleApprove() {
