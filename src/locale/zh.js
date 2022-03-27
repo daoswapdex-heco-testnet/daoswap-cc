@@ -261,7 +261,7 @@ export default {
   "Task 6": "任务6",
 
   ACC: "跨链",
-  "Apply Cross Chain": "申请跨链",
+  "Apply Cross Chain": "跨链桥",
   "Enter the cross chain amount": "输入跨链额度",
   Apply: "申请",
   ApplyForm: {
@@ -273,6 +273,8 @@ export default {
     "The amount is required": "请填写申请额度",
     "The amount does not meet the requirements": "申请额度不符合要求"
   },
-  "Apply Success": "申请成功",
-  "Not within the application time frame": "不在申请时间范围内"
+  "Apply Cross Chain Success": "申请跨链成功",
+  "Not within the application time frame": "不在申请时间范围内",
+  "The wallet address of BSC is the same as your HECO's, please make sure your current wallet is available in BSC before applying.":
+    "BSC的钱包地址与你HECO申请的一样，请在申请前确保你当前申请的钱包在BSC可用。"
 };

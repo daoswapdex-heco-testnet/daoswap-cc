@@ -20,11 +20,11 @@
                   <v-card-text>
                     <v-text-field
                       :label="
-                        `${$t('Enter the cross chain amount')}(${$t(
+                        `${$t(
                           'At least'
                         )} ${minApplyAmount} ${tokenSymbol}, ${$t(
                           'At mostest'
-                        )} ${maxApplyAmount} ${tokenSymbol})`
+                        )} ${maxApplyAmount} ${tokenSymbol}`
                       "
                       v-model="applyAmount"
                       :error-messages="applyAmountErrors"
@@ -62,6 +62,18 @@
                 <v-row align="center">
                   <v-col class="subtitle-1" cols="12">
                     {{ $t("Not within the application time frame") }}
+                  </v-col>
+                </v-row>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-text>
+                <v-row align="center">
+                  <v-col class="subtitle-2" cols="12" style="color: #ff5252">
+                    {{
+                      $t(
+                        "The wallet address of BSC is the same as your HECO's, please make sure your current wallet is available in BSC before applying."
+                      )
+                    }}
                   </v-col>
                 </v-row>
               </v-card-text>
@@ -483,7 +495,7 @@ export default {
             this.loading = false;
             this.operationResult.color = "success";
             this.operationResult.snackbar = true;
-            this.operationResult.text = "Apply Success";
+            this.operationResult.text = "Apply Cross Chain Success";
             this.getInfo();
           })
           .catch(e => {

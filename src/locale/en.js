@@ -271,7 +271,7 @@ export default {
   "Task 6": "Task 6",
 
   ACC: "ACC",
-  "Apply Cross Chain": "Apply Cross Chain",
+  "Apply Cross Chain": "Bridge",
   "Enter the cross chain amount": "Enter the cross chain amount",
   Apply: "Apply",
   ApplyForm: {
@@ -285,7 +285,9 @@ export default {
     "The amount does not meet the requirements":
       "The amount does not meet the requirements"
   },
-  "Apply Success": "Apply Success",
+  "Apply Cross Chain Success": "Apply Cross Chain Success",
   "Not within the application time frame":
-    "Not within the application time frame"
+    "Not within the application time frame",
+  "The wallet address of BSC is the same as your HECO's, please make sure your current wallet is available in BSC before applying.":
+    "The wallet address of BSC is the same as your HECO's, please make sure your current wallet is available in BSC before applying."
 };
