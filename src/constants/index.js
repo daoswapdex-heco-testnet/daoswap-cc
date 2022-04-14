@@ -42,7 +42,7 @@ export const StakingLimitForSingleContractAddress =
   "0xeE0cCA441a267bD4719f296EFDa6d04b2ccDdb5D";
 
 export const TokenCrossChainContractAddress =
-  "0xCe8476936c170902437e71DeaA1d2Cf1AB8af134";
+  "0xD3B285B3C05e6fC3386e3d4443007bEEC84Ebc20";
 
 /********** base **********/
 export const DAOAddress = "0xd2f169c79553654452a3889b210AEeF494eB2374";
