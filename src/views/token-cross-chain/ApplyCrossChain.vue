@@ -197,6 +197,7 @@ export default {
     isWhitelist: false,
     startTime: 0,
     endTime: 0,
+    dayCap: 0,
     isOpen: false,
     // 提示框
     operationResult: {
@@ -345,6 +346,11 @@ export default {
         JSBI.BigInt(endTime),
         JSBI.BigInt(this.currentDayTimestamp)
       ).toString();
+      // get day cap
+      const dayCap = await contract.methods.dayCap().call({
+        from: this.address
+      });
+      this.dayCap = parseFloat(weiToEther(dayCap, this.web3));
       const nowTime = Math.floor(Date.now() / 1000);
       this.isOpen =
         JSBI.lessThanOrEqual(
@@ -354,7 +360,8 @@ export default {
         JSBI.greaterThanOrEqual(
           JSBI.BigInt(this.endTime),
           JSBI.BigInt(nowTime)
-        );
+        ) &&
+        this.dayCap > 0;
     },
     // 授权
     handleApprove() {
