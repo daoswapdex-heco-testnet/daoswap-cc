@@ -43,14 +43,16 @@
                       :disabled="!(submitLoading && accountAssets.balance > 0)"
                       @click="
                         accountAssets.allowanceAmount &&
-                        accountAssets.allowanceAmount >= applyAmount
+                        parseFloat(accountAssets.allowanceAmount) >=
+                          parseFloat(applyAmount)
                           ? submit()
                           : handleApprove()
                       "
                     >
                       {{
                         accountAssets.allowanceAmount &&
-                        accountAssets.allowanceAmount >= applyAmount
+                        parseFloat(accountAssets.allowanceAmount) >=
+                          parseFloat(applyAmount)
                           ? $t("Apply")
                           : $t("Approve")
                       }}
@@ -396,24 +398,35 @@ export default {
       } else {
         this.$v.$touch();
         this.loading = true;
-        getContractByABI(
-          ApplyCrossChain_ABI,
-          TokenCrossChainContractAddress,
-          this.web3
-        )
-          .methods.applyCrossChain(etherToWei(this.applyAmount, this.web3))
-          .send({ from: this.address })
-          .then(() => {
-            this.loading = false;
-            this.operationResult.color = "success";
-            this.operationResult.snackbar = true;
-            this.operationResult.text = "Apply Cross Chain Success";
-            this.getInfo();
-          })
-          .catch(e => {
-            this.loading = false;
-            console.info(e);
-          });
+        if (
+          parseFloat(this.applyAmount) <=
+          parseFloat(this.accountAssets.allowanceAmount)
+        ) {
+          getContractByABI(
+            ApplyCrossChain_ABI,
+            TokenCrossChainContractAddress,
+            this.web3
+          )
+            .methods.applyCrossChain(etherToWei(this.applyAmount, this.web3))
+            .send({ from: this.address })
+            .then(() => {
+              this.loading = false;
+              this.operationResult.color = "success";
+              this.operationResult.snackbar = true;
+              this.operationResult.text = "Apply Cross Chain Success";
+              this.getInfo();
+            })
+            .catch(e => {
+              this.loading = false;
+              console.info(e);
+            });
+        } else {
+          this.operationResult.color = "error";
+          this.operationResult.snackbar = true;
+          this.operationResult.text =
+            "ApplyForm.The amount exceeds the allowance amount";
+          this.loading = false;
+        }
       }
     }
   }
